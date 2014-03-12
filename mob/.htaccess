@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(([^/]+/+)*[^\.]+)$ $1.php?%1
+
+php_value  post_max_size 40M
+php_value upload_max_filesize 40M 

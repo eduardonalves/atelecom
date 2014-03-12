@@ -1,0 +1,79 @@
+<?
+
+
+$s = explode('|',$_GET['s']);
+$status = "";
+foreach ($s as $key => $st){
+$status .= ",'".$st."'";
+}
+$status = substr($status,1);
+
+if($_GET['v']){
+
+$datain = substr($_GET['v'],6,4).substr($_GET['v'],3,2).substr($_GET['v'],0,2);
+	
+} else { $datain = $v;}
+
+
+if($_GET['ate']){
+
+$datafin = substr($_GET['ate'],6,4).substr($_GET['ate'],3,2).substr($_GET['ate'],0,2);
+	
+} else { $datafin = $ano.$mes.'31';}
+
+
+if($USUARIO['tipo_usuario'] == 'MONITOR'){ $loginMONITOR = $USUARIO['id'];}
+
+if($_GET['s'] != ""){
+
+if($_GET['g'] == '1'){
+$conVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao != '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && status IN (".$status.") && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%'  ORDER BY $ordem LIMIT $inicial, $numreg");
+
+$quantVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao != '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && status IN (".$status.") && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%'");
+$quantreg = mysql_num_rows($quantVENDA);
+
+} else if($_GET['g'] == '0'){
+$conVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao = '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && status IN (".$status.") && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%' ORDER BY $ordem LIMIT $inicial, $numreg");
+
+$quantVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao = '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && status IN (".$status.") && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%'");
+$quantreg = mysql_num_rows($quantVENDA);
+
+} else {	
+
+$conVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && status IN (".$status.")  && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%' ORDER BY $ordem LIMIT $inicial, $numreg");
+	
+$quantVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && status IN (".$status.") && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%'");
+$quantreg = mysql_num_rows($quantVENDA);
+
+}
+
+} else {
+	
+	
+if($_GET['g'] == '1'){
+$conVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao != '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%' ORDER BY $ordem LIMIT $inicial, $numreg");
+
+$quantVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao != '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%'");
+$quantreg = mysql_num_rows($quantVENDA);
+
+} else if($_GET['g'] == '0'){
+$conVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao = '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%' ORDER BY $ordem LIMIT $inicial, $numreg");
+
+$quantVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao = '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%' ");
+$quantreg = mysql_num_rows($quantVENDA);
+
+} else {	
+
+$conVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%'  && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%' ORDER BY $ordem LIMIT $inicial, $numreg");
+	
+$quantVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && monitor LIKE '%".$loginMONITOR."%'");
+$quantreg = mysql_num_rows($quantVENDA);	
+	
+}
+	
+}
+
+
+
+
+?>

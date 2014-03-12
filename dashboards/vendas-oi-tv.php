@@ -1,0 +1,800 @@
+<?php error_reporting(0);?>
+
+<?
+
+session_start();
+
+// Verificar se está logado
+if(!isset($_SESSION['usuario'])){ ?>
+	
+<script type="text/javascript">
+<!-- window.location = 'index.php' -->
+</script>	
+	
+	
+<? } 
+
+include "../conexao.php";
+
+$idPRODUTO = '4';
+
+$conUSUARIO = $conexao->query("SELECT * FROM usuarios WHERE  id = '".$_SESSION['usuario']."'");
+$USUARIO = mysql_fetch_assoc($conUSUARIO);
+if($USUARIO['tipo_usuario'] == 'MONITOR'){ $loginMONITOR =' monitor ='.$USUARIO['id'].'';}
+if($USUARIO['tipo_usuario'] == 'SUPERVISOR'){
+	
+	$idsupervisor = $USUARIO['id'];
+	$querymonitores = $conexao->query("SELECT * FROM usuarios WHERE supervisor = '$idsupervisor' && acesso_usuario = '".$USUARIO['acesso_usuario']."'");
+	$j=0;
+	while($row = mysql_fetch_assoc($querymonitores)){
+		
+		if($j ==0){
+			$loginMONITOR = $loginMONITOR.'  monitor = '.$row['id'].'' ;
+
+		}else{
+			$loginMONITOR = $loginMONITOR.'||  monitor = '.$row['id'].'';
+		}
+		$j= $j+1;
+	}
+	
+	if($loginMONITOR=="") { $loginMONITOR = "1=2"; }
+}
+
+
+
+
+if($_GET['d'] == ''){ $dia = date("d"); } else if($_GET['d'] == 'Todos'){ $dia = '';} else { $dia = $_GET['d'];}
+if($_GET['m'] == ''){ $mes = date("m"); } else { $mes = $_GET['m'];}
+if($_GET['a'] == ''){ $ano = date("Y"); } else { $ano = $_GET['a'];}
+
+if(($USUARIO['tipo_usuario'] == 'MONITOR') || ($USUARIO['tipo_usuario'] == 'SUPERVISOR')){
+	// Vendas Total
+	$conVENDAS = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
+	$totalVENDAS = mysql_num_rows($conVENDAS);
+
+	// Vendas Conectadas
+	$conINST = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data_conectada LIKE '%".$ano.$mes.$dia."%' && status = 'CONECTADO' && ($loginMONITOR)");
+	$totalINST = mysql_num_rows($conINST);
+
+	// Instalar 
+	$conPEND = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'INSTALAR') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
+	$totalPEND = mysql_num_rows($conPEND);
+
+	// Com restrição
+	$conRES = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'RESTRIÇÃO') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
+	$totalRES = mysql_num_rows($conRES);
+
+	// Rejeitados (=Devolvido + Cancelado + Sem Contato)
+	$conCANC = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'DEVOLVIDO' || status = 'CANCELADO' || status = 'SEM CONTATO') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
+	$totalCANC = mysql_num_rows($conCANC);
+
+	// Tratar Auditoria (Gravar + Aprovado)
+	$conOUT = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'GRAVAR' || status = 'APROVADO') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
+
+	$totalOUT = mysql_num_rows($conOUT);
+}else{
+	// Vendas Total
+	$conVENDAS = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data LIKE '%".$ano.$mes.$dia."%' ");
+	$totalVENDAS = mysql_num_rows($conVENDAS);
+
+	// Vendas Conectadas
+	$conINST = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data_conectada LIKE '%".$ano.$mes.$dia."%' && status = 'CONECTADO' ");
+	$totalINST = mysql_num_rows($conINST);
+
+	// Instalar 
+	$conPEND = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'INSTALAR') && data LIKE '%".$ano.$mes.$dia."%' ");
+	$totalPEND = mysql_num_rows($conPEND);
+
+	// Com restrição
+	$conRES = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'RESTRIÇÃO') && data LIKE '%".$ano.$mes.$dia."%' ");
+	$totalRES = mysql_num_rows($conRES);
+
+	// Rejeitados (=Devolvido + Cancelado + Sem Contato)
+	$conCANC = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'DEVOLVIDO' || status = 'CANCELADO' || status = 'SEM CONTATO') && data LIKE '%".$ano.$mes.$dia."%' ");
+	$totalCANC = mysql_num_rows($conCANC);
+
+	// Tratar Auditoria (Gravar + Aprovado)
+	$conOUT = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'GRAVAR' || status = 'APROVADO') && data LIKE '%".$ano.$mes.$dia."%' ");
+
+	$totalOUT = mysql_num_rows($conOUT);
+}
+switch ($mes) {
+        case "01":    $m = Janeiro;     break;
+        case "02":    $m = Fevereiro;   break;
+        case "03":    $m = Março;       break;
+        case "04":    $m = Abril;       break;
+        case "05":    $m = Maio;        break;
+        case "06":    $m = Junho;       break;
+        case "07":    $m = Julho;       break;
+        case "08":    $m = Agosto;      break;
+        case "09":    $m = Setembro;    break;
+        case "10":    $m = Outubro;     break;
+        case "11":    $m = Novembro;    break;
+        case "12":    $m = Dezembro;    break; 
+ }
+?>
+<?
+
+// Valores
+$v1 = $totalVENDAS;
+$v2 = $totalINST;
+$v3 = $totalPEND;
+$v4 = $totalRES;
+$v5 = $totalCANC;
+$v6 = $totalOUT;
+
+// Nomes dos valores
+$x1 = 'Vendas';
+$x2 = 'Instalações';
+$x3 = 'Instalar';
+$x4 = 'Restrições';
+$x5 = 'Rejeitados';
+$x6 = 'Auditoria';
+
+// Tamanho
+$w = 350;
+$h = 190;
+
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+// Porcentagens
+$p1 = ceil($v1*100/(max($v1,$v2,$v3,$v4,$v5,$v6)));
+$p2 = ceil($v2*100/(max($v1,$v2,$v3,$v4,$v5,$v6)));
+$p3 = ceil($v3*100/(max($v1,$v2,$v3,$v4,$v5,$v6)));
+$p4 = ceil($v4*100/(max($v1,$v2,$v3,$v4,$v5,$v6)));
+$p5 = ceil($v5*100/(max($v1,$v2,$v3,$v4,$v5,$v6)));
+$p6 = ceil($v6*100/(max($v1,$v2,$v3,$v4,$v5,$v6)));
+
+
+// Linhas
+$l1 = ceil(((max($v1,$v2,$v3,$v4,$v5,$v6))*90)/100);
+$l2 = ceil(((max($v1,$v2,$v3,$v4,$v5,$v6))*70)/100);
+$l3 = ceil(((max($v1,$v2,$v3,$v4,$v5,$v6))*50)/100);
+$l4 = ceil(((max($v1,$v2,$v3,$v4,$v5,$v6))*30)/100);
+$l5 = ceil(((max($v1,$v2,$v3,$v4,$v5,$v6))*10)/100);
+
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Vendas</title>
+
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+    
+		
+$('#chart1').animate({height:'<?= $p1;?>%'},1700);
+
+$('#chart2').animate({height:'<?= $p2;?>%'},1500);
+$('#chart4').animate({height:'<?= $p4;?>%'},1500);	
+$('#chart5').animate({height:'<?= $p5;?>%'},1300);	
+$('#chart6').animate({height:'<?= $p6;?>%'},1600);	
+
+$('#chart3').animate({height:'<?= $p3;?>%'},1700, function(){	
+	
+$('.v').animate({top:'-15px'},1000);	
+	});
+	
+});
+
+
+function showinfo(id){
+
+document.getElementById(id).style.display = 'block';	
+	
+	}
+	
+function hideinfo(id){
+
+document.getElementById(id).style.display = 'none';	
+	
+	}	
+	
+function mostrardias(){
+
+$('#dias').fadeIn(600);
+}	
+	
+function mostrarmeses(){
+
+$('#meses').fadeIn(600);
+}
+
+function mostraranos(){
+
+$('#anos').fadeIn(600);
+}	
+
+
+function mostrargrafico(gra){
+
+
+$('#grafico').fadeIn(600);
+
+document.getElementById('grafico').innerHTML = '<div id="fecharpacotes" onclick="escondergrafico();">VOLTAR</div><iframe frameborder="0" scrolling="no" id="framepacotes" src="grafico/grafico-oitv-'+gra+'.php?d=<?= $_GET['d'];?>&m=<?= $_GET['m'];?>&a=<?= $_GET['a'];?>"></iframe>';
+
+
+$('#chart1').animate({height:'0%'},700);
+$('#chart2').animate({height:'0%'},500);
+$('#chart3').animate({height:'0%'},400);
+$('#chart4').animate({height:'0%'},500);	
+$('#chart5').animate({height:'0%'},600);	
+$('#chart6').animate({height:'0%'},400);
+
+
+}
+
+function escondergrafico(){
+
+$('#grafico').fadeOut(600);
+document.getElementById('grafico').innerHTML = '';
+
+$('#chart1').animate({height:'<?= $p1;?>%'},1700);
+$('#chart2').animate({height:'<?= $p2;?>%'},1500);
+$('#chart4').animate({height:'<?= $p4;?>%'},1500);	
+$('#chart5').animate({height:'<?= $p5;?>%'},1600);	
+$('#chart3').animate({height:'<?= $p3;?>%'},1400);
+$('#chart6').animate({height:'<?= $p6;?>%'},1350);
+
+}	
+
+
+
+</script>
+
+
+</head>
+
+<style type="text/css">
+
+body{font-family:Arial, Helvetica, sans-serif; margin:0 0 0 0;}
+
+
+#top{width:<?= $w;?>px; text-align:center; color:#999; font-size:12px; font-weight:bold; background-color:#feffff; height:25px;}
+
+#content, #dias, #meses, #anos, #grafico{position:absolute; width:<?= $w;?>px; height:<?= $h;?>px; cursor:default; background: #feffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #feffff 0%, #f6f6f6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feffff), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #feffff 0%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #feffff 0%,#f6f6f6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #feffff 0%,#f6f6f6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #feffff 0%,#f6f6f6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+}
+
+#l1{position:absolute; width:100%; height:1px; background-color:#CCC; bottom:90%}
+#n1{position:absolute; font-size:10px; color:#bbb; bottom:90%}
+
+#l2{position:absolute; width:100%; height:1px; background-color:#CCC; bottom:70%}
+#n2{position:absolute; font-size:10px; color:#bbb; bottom:70%}
+
+#l3{position:absolute; width:100%; height:1px; background-color:#CCC; bottom:50%}
+#n3{position:absolute; font-size:10px; color:#bbb; bottom:50%}
+
+#l4{position:absolute; width:100%; height:1px; background-color:#CCC; bottom:30%}
+#n4{position:absolute; font-size:10px; color:#bbb; bottom:30%}
+
+#l5{position:absolute; width:100%; height:1px; background-color:#CCC; bottom:10%}
+#n5{position:absolute; font-size:10px; color:#bbb; bottom:10%}
+
+
+#chart1{position:absolute; width:30px; height:0%; background: #fcf400; /* Old browsers */
+background: -moz-linear-gradient(top,  #fcf400 0%, #ffcc00 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcf400), color-stop(100%,#ffcc00)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #fcf400 0%,#ffcc00 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #fcf400 0%,#ffcc00 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #fcf400 0%,#ffcc00 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #fcf400 0%,#ffcc00 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf400', endColorstr='#ffcc00',GradientType=0 ); /* IE6-9 */
+ left:30px; bottom:0%;}
+
+#chart2{position:absolute; width:30px; height:0%; background: #0080bc; /* Old browsers */
+background: -moz-linear-gradient(top,  #0080bc 0%, #003399 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0080bc), color-stop(100%,#003399)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #0080bc 0%,#003399 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #0080bc 0%,#003399 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #0080bc 0%,#003399 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #0080bc 0%,#003399 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0080bc', endColorstr='#003399',GradientType=0 ); /* IE6-9 */
+ left:85px; bottom:0%;}
+
+#chart3{position:absolute; width:30px; height:0%; background: #7de51b; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdkZTUxYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyOWIyMGEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #7de51b 0%, #29b20a 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7de51b), color-stop(100%,#29b20a)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #7de51b 0%,#29b20a 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #7de51b 0%,#29b20a 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #7de51b 0%,#29b20a 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #7de51b 0%,#29b20a 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7de51b', endColorstr='#29b20a',GradientType=0 ); /* IE6-8 */
+ left:137px; bottom:0px;}
+ 
+ #chart4{position:absolute; width:30px; height:0%; background: rgb(249,187,17); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(249,187,17,1) 1%, rgba(249,125,17,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(249,187,17,1)), color-stop(100%,rgba(249,125,17,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(249,187,17,1) 1%,rgba(249,125,17,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(249,187,17,1) 1%,rgba(249,125,17,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(249,187,17,1) 1%,rgba(249,125,17,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(249,187,17,1) 1%,rgba(249,125,17,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bb11', endColorstr='#f97d11',GradientType=0 ); /* IE6-9 */
+
+ left:189px; bottom:0px;}
+ 
+ #chart5{position:absolute; width:30px; height:0%; background: #ff3019; /* Old browsers */
+background: -moz-linear-gradient(top,  #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ff3019 0%,#cf0404 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
+ left:241px; bottom:0px;}
+
+
+ #chart6{position:absolute; width:30px; height:0%; background: rgb(250,198,149); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(250,198,149,1) 0%, rgba(245,171,102,1) 47%, rgba(239,141,49,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(250,198,149,1)), color-stop(47%,rgba(245,171,102,1)), color-stop(100%,rgba(239,141,49,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fac695', endColorstr='#ef8d31',GradientType=0 ); /* IE6-9 */
+
+ left:293px; bottom:0px;}
+ 
+ 
+ 
+.chart:hover{ border:#fdfdfd solid 1px; border-bottom:0px; cursor:pointer;
+	
+	-webkit-box-shadow: 1px 1px 3px 2px #BBB ;
+box-shadow: 1px 1px 3px 2px #aaa;  }
+
+.info{ position:absolute; min-width:85px; padding-left:3px; padding-right:3px; height:35px; vertical-align:middle; left:25px; font-size:10px; top:5px; text-align:center; background-color:#FFF; z-index:100; display:none;
+
+-webkit-box-shadow: 0px 0px 2px 1px #BBB ;
+box-shadow: 0px 0px 2px 1px #BBB; }
+
+.info2{ position:absolute; min-width:85px; padding-left:3px; padding-right:3px; height:35px; vertical-align:middle; right:25px; font-size:10px; top:5px; text-align:center; background-color:#FFF; z-index:100; display:none;
+
+-webkit-box-shadow: 0px 0px 2px 1px #BBB ;
+box-shadow: 0px 0px 2px 1px #BBB; }
+
+
+#i1{<? if($p1>23){?>
+-webkit-border-radius: 4px 4px 4px 0px;
+border-radius: 4px 4px 4px 0px; 
+<? } else { ?>
+-webkit-border-radius: 0px 4px 4px 4px;
+border-radius: 0px 4px 4px 4px; 
+<? } ?>
+}
+
+#i2{<? if($p2>23){?>
+-webkit-border-radius: 4px 4px 4px 0px;
+border-radius: 4px 4px 4px 0px; 
+<? } else { ?>
+-webkit-border-radius: 0px 4px 4px 4px;
+border-radius: 0px 4px 4px 4px; 
+<? } ?>
+}
+
+#i3{<? if($p3>23){?>
+-webkit-border-radius: 4px 4px 4px 0px;
+border-radius: 4px 4px 4px 0px; 
+<? } else { ?>
+-webkit-border-radius: 0px 4px 4px 4px;
+border-radius: 0px 4px 4px 4px; 
+<? } ?>
+}
+
+#i4{<? if($p4>23){?>
+-webkit-border-radius: 4px 4px 4px 0px;
+border-radius: 4px 4px 4px 0px; 
+<? } else { ?>
+-webkit-border-radius: 0px 4px 4px 4px;
+border-radius: 0px 4px 4px 4px; 
+<? } ?>
+}
+
+#i5{<? if($p5>23){?> 
+-webkit-border-radius: 4px 4px 0px 4px;
+border-radius: 4px 4px 0px 4px; 
+<? } else { ?>
+-webkit-border-radius: 4px 0px 4px 4px;
+border-radius: 4px 0px 4px 4px;
+<? } ?>
+}
+
+#i6{<? if($p6>23){?> 
+-webkit-border-radius: 4px 4px 0px 4px;
+border-radius: 4px 4px 0px 4px; 
+<? } else { ?>
+-webkit-border-radius: 4px 0px 4px 4px;
+border-radius: 4px 0px 4px 4px;
+<? } ?>
+}
+
+#x{ position:absolute; width:100%; color:#565656; top:100%; height:20px; font-size:9px; background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+
+}
+
+#x1{position:absolute; left:29px; top:2px;}
+#x2{position:absolute; left:77px; top:2px;}
+#x3{position:absolute; left:138px; top:2px;}
+#x4{position:absolute; left:183px; top:2px;}
+#x5{position:absolute; left:238px; top:2px;}
+#x6{position:absolute; left:291px; top:2px;}
+
+.v{position:absolute; top:5px; text-align:center; font-size:12px; width:100%}
+
+
+#dias, #meses, #anos{position:absolute; padding:15px; width: 320px; top:0px; background-color:#FFF; z-index:100;}
+
+.dia{ text-align:center; 
+align:center;
+width:35px; 
+height:29px; 
+vertical-align:middle; 
+font-size:12px; 
+float:left;  
+border:1px solid #ededed; 
+margin-top:3px; 
+padding-top:13px;
+margin-left:3px;
+background: #feffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #feffff 0%, #dce4ea 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feffff), color-stop(100%,#dce4ea)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #feffff 0%,#dce4ea 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #feffff 0%,#dce4ea 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #feffff 0%,#dce4ea 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #feffff 0%,#dce4ea 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#dce4ea',GradientType=0 ); /* IE6-9 */
+
+}
+
+.diaAtual{ text-align:center; 
+cursor:pointer;
+align:center;
+width:35px; 
+height:29px; 
+vertical-align:middle; 
+font-size:12px; 
+float:left;  
+border:1px solid #ededed; 
+margin-top:3px; 
+padding-top:13px;
+margin-left:3px;
+background: #fff8a0; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmOGEwIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNDElIiBzdG9wLWNvbG9yPSIjZmVmY2VhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSIjZmVmY2VhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTclIiBzdG9wLWNvbG9yPSIjZmZmOGEwIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZlZmNlYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(-45deg,  #fff8a0 0%, #fefcea 41%, #fefcea 55%, #fff8a0 57%, #fefcea 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#fff8a0), color-stop(41%,#fefcea), color-stop(55%,#fefcea), color-stop(57%,#fff8a0), color-stop(100%,#fefcea)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  #fff8a0 0%,#fefcea 41%,#fefcea 55%,#fff8a0 57%,#fefcea 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  #fff8a0 0%,#fefcea 41%,#fefcea 55%,#fff8a0 57%,#fefcea 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  #fff8a0 0%,#fefcea 41%,#fefcea 55%,#fff8a0 57%,#fefcea 100%); /* IE10+ */
+background: linear-gradient(135deg,  #fff8a0 0%,#fefcea 41%,#fefcea 55%,#fff8a0 57%,#fefcea 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff8a0', endColorstr='#fefcea',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+
+}
+
+.mes, .ano{ text-align:center; 
+align:center;
+width:100px; 
+height:30px; 
+vertical-align:middle; 
+font-size:12px; 
+float:left;  
+border:1px solid #ededed; 
+margin-top:3px; 
+padding-top:13px;
+margin-left:3px;
+background: #feffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #feffff 0%, #dce4ea 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feffff), color-stop(100%,#dce4ea)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #feffff 0%,#dce4ea 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #feffff 0%,#dce4ea 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #feffff 0%,#dce4ea 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #feffff 0%,#dce4ea 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#dce4ea',GradientType=0 ); /* IE6-9 */
+
+}
+
+.dia:hover, .mes:hover, .ano:hover, .selected{ cursor: pointer;
+border:1px solid #CCC; 
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 60%, #ffffff 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(60%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 60%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 60%,#ffffff 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 60%,#ffffff 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 60%,#ffffff 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+}
+
+
+#grafico{ position:absolute; top:0px; width:<?= $w;?>px; height:220px; display:none;}
+
+#framepacotes{width:100%; height:230px;}
+
+#fecharpacotes{position: absolute; color:#FFF; font-weight:bold; font-size: 12px; left: 10px; cursor: pointer; top:5px; width:60px; height: 16px; background-color:#CCC; text-align:center;}
+</style>
+
+
+<script>
+$(function() {
+  var ele = $('#v1');
+  var clr = null;
+  var rand = 0;
+  (loop = function() { 
+    clearTimeout(clr);
+    (inloop = function() {
+		if(rand < <?= $v1;?>){
+      ele.html(rand+=<?= ceil($v1/40);?>);} else {ele.html(<?= $v1;?>)}
+      if(!(rand % <?= $v1;?>)) {
+        return;
+      }
+      clr = setTimeout(inloop, 30);
+    })();  
+  })();
+});
+
+$(function() {
+  var ele2 = $('#v2');
+  var clr2 = null;
+  var rand2 = 0;
+  (loop2 = function() { 
+    clearTimeout(clr2);
+    (inloop2 = function() {
+		if(rand2 < <?= $v2;?>){
+      ele2.html(rand2+=<?= ceil($v2/40);?>);} else {ele2.html(<?= $v2;?>)}
+      if(!(rand2 % <?= $v2;?>)) {
+        return;
+      }
+      clr2 = setTimeout(inloop2, 30);
+    })();  
+  })();
+});
+
+$(function() {
+  var ele3 = $('#v3');
+  var clr3 = null;
+  var rand3 = 0;
+  (loop3 = function() { 
+    clearTimeout(clr3);
+    (inloop3 = function() {
+		if(rand3 < <?= $v3;?>){
+      ele3.html(rand3+=<?= ceil($v3/40);?>);} else {ele3.html(<?= $v3;?>)}
+      if(!(rand3 % <?= $v3;?>)) {
+        return;
+      }
+      clr3 = setTimeout(inloop3, 30);
+    })();  
+  })();
+});
+
+$(function() {
+  var ele4 = $('#v4');
+  var clr4 = null;
+  var rand4 = 0;
+  (loop4 = function() { 
+    clearTimeout(clr4);
+    (inloop4 = function() {
+		if(rand4 < <?= $v4;?>){
+      ele4.html(rand4+=<?= ceil($v4/40);?>);} else {ele4.html(<?= $v4;?>)}
+      if(!(rand4 % <?= $v4;?>)) {
+        return;
+      }
+      clr4 = setTimeout(inloop4, 30);
+    })();  
+  })();
+});
+
+$(function() {
+  var ele5 = $('#v5');
+  var clr5 = null;
+  var rand5 = 0;
+  (loop5 = function() { 
+    clearTimeout(clr5);
+    (inloop5 = function() {
+		if(rand5 < <?= $v5;?>){
+      ele5.html(rand5+=<?= ceil($v5/40);?>);} else {ele5.html(<?= $v5;?>)}
+      if(!(rand5 % <?= $v5;?>)) {
+        return;
+      }
+      clr5 = setTimeout(inloop5, 30);
+    })();  
+  })();
+});
+
+$(function() {
+  var ele6 = $('#v6');
+  var clr6 = null;
+  var rand6 = 0;
+  (loop6 = function() { 
+    clearTimeout(clr6);
+    (inloop6 = function() {
+		if(rand6 < <?= $v6;?>){
+      ele6.html(rand5+=<?= ceil($v6/40);?>);} else {ele6.html(<?= $v6;?>)}
+      if(!(rand6 % <?= $v6;?>)) {
+        return;
+      }
+      clr6 = setTimeout(inloop6, 30);
+    })();  
+  })();
+});
+</script>
+
+<body>
+
+
+<div id="top">
+<span onClick="mostrardias();" style="cursor:pointer;" title="Escolher Dia"><? if($dia == ''){ echo 'Todos';} else { echo $dia;};?></span>
+<span onClick="mostrarmeses();" style="cursor:pointer;" title="Escolher Mês"><?= $m;?></span>
+<span onClick="mostraranos();" style="cursor:pointer;" title="Escolher Ano"><?= $ano;?></span>
+</div>
+
+<div id="dias" style="display:none;">
+<div class="dia" onClick="window.location = '?d=Todos&m=<?= $_GET['m'];?>&a=<?= $_GET['a'];?>'">
+Todos
+</div>
+
+<? 
+for($d=1;$d<32;$d++){
+?>
+<div <? if($d == date("d") && $mes == date("m") && $ano == date("Y")){ ?> title="Hoje" class="diaAtual" <? } else if($d == $dia){ ?> title="Selecionado" class="dia selected" <? } else {?>class="dia"<? } ?> onClick="window.location = '?d=<?= sprintf("%02d",$d);?>&m=<?= $_GET['m'];?>&a=<?= $_GET['a'];?>'">
+<?= sprintf("%02d",$d); ?>
+</div>
+<? } ?>
+</div>
+
+<div id="meses" style="display:none;">
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=01&a=<?= $_GET['a']?>'">
+Janeiro
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=02&a=<?= $_GET['a']?>'">
+Fevereiro
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=03&a=<?= $_GET['a']?>'">
+Março
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=04&a=<?= $_GET['a']?>'">
+Abril
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=05&a=<?= $_GET['a']?>'">
+Maio
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=06&a=<?= $_GET['a']?>'">
+Junho
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=07&a=<?= $_GET['a']?>'">
+Julho
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=08&a=<?= $_GET['a']?>'">
+Agosto
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=09&a=<?= $_GET['a']?>'">
+Setembro
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=10&a=<?= $_GET['a']?>'">
+Outubro
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=11&a=<?= $_GET['a']?>'">
+Novembro
+</div>
+<div class="mes" onClick="window.location = '?d=<?= $_GET['d']?>&m=12&a=<?= $_GET['a']?>'">
+Dezembro
+</div>
+</div>
+
+<div id="anos" style="display:none;">
+
+<? for($a=2012;$a<=date("Y");$a++){
+
+?>
+<div class="ano" onClick="window.location = '?d=<?= $_GET['d']?>&m=<?= $_GET['m'];?>&a=<?= $a; ?>'">
+<?= $a; ?>
+</div>
+<? } ?>
+</div>
+
+
+<div id="content">
+
+<div id="l1"></div>
+<div id="n1"><?= $l1;?></div>
+<div id="l2"></div>
+<div id="n2"><?= $l2;?></div>
+<div id="l3"></div>
+<div id="n3"><?= $l3;?></div>
+<div id="l4"></div>
+<div id="n4"><?= $l4;?></div>
+<div id="l5"></div>
+<div id="n5"><?= $l5;?></div>
+
+<div id="chart1" class="chart" onMouseOver="showinfo('i1')" onMouseOut="hideinfo('i1')" onClick="mostrargrafico('vendas');">
+<div id="v1" class="v"><?= $v1;?></div>
+<div id="i1" class="info" onMouseOver="showinfo('i1')" onMouseOut="hideinfo('i1')">
+<b><?= $m.' '.$ano;?></b><br />
+<?= $x1;?>: <b><?= $v1;?></b>
+</div>
+</div>
+
+<div id="chart2" class="chart" onMouseOver="showinfo('i2')" onMouseOut="hideinfo('i2')" onClick="mostrargrafico('instalacoes');">
+<div id="v2" class="v"><?= $v2;?></div>
+<div id="i2" class="info" onMouseOver="showinfo('i2')" onMouseOut="hideinfo('i2')">
+<b><?= $m.' '.$ano;?></b><br />
+<?= $x2;?>: <b><?= $p2;?>%</b>
+</div>
+</div>
+
+<div id="chart3" class="chart" onMouseOver="showinfo('i3')" onMouseOut="hideinfo('i3')" onClick="mostrargrafico('instalar');">
+<div id="v3" class="v"><?= $v3;?></div>
+<div id="i3" class="info" onMouseOver="showinfo('i3')" onMouseOut="hideinfo('i3')">
+<b><?= $m.' '.$ano;?></b><br />
+<?= $x3;?>: <b><?= $p3;?>%</b>
+</div>
+</div>
+
+<div id="chart4" class="chart" onMouseOver="showinfo('i4')" onMouseOut="hideinfo('i4')"   onClick="mostrargrafico('restricoes');">
+<div id="v4" class="v"><?= $v4;?></div>
+<div id="i4" class="info" onMouseOver="showinfo('i4')" onMouseOut="hideinfo('i4')">
+<b><?= $m.' '.$ano;?></b><br />
+<?= $x4;?>: <b><?= $p4;?>%</b>
+</div>
+</div>
+
+<div id="chart5" class="chart" onMouseOver="showinfo('i5')" onMouseOut="hideinfo('i5')" onClick="mostrargrafico('rejeitados');">
+<div id="v5" class="v"><?= $v5;?></div>
+<div id="i5" class="info2" onMouseOver="showinfo('i5')" onMouseOut="hideinfo('i5')">
+<b><?= $m.' '.$ano;?></b><br />
+<?= $x5;?>: <b><?= $p5;?>%</b>
+</div>
+</div>
+
+
+<div id="chart6" class="chart" onMouseOver="showinfo('i6')" onMouseOut="hideinfo('i6')" onClick="mostrargrafico('auditoria');">
+<div id="v6" class="v"><?= $v6;?></div>
+<div id="i6" class="info2" onMouseOver="showinfo('i6')" onMouseOut="hideinfo('i6')">
+<b><?= $m.' '.$ano;?></b><br />
+<?= $x6;?>: <b><?= $p6;?>%</b>
+</div>
+</div> 
+
+
+<div id="x">
+
+<div id="x1"><?= $x1;?></div>
+<div id="x2"><?= $x2;?></div>
+<div id="x3"><?= $x3;?></div>
+<div id="x4"><?= $x4;?></div>
+<div id="x5"><?= $x5;?></div>
+<div id="x6"><?= $x6;?></div> 
+
+</div>
+
+
+</div>
+
+
+<div id="grafico">
+
+</div>
+
+</body>
+</html>

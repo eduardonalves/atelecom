@@ -1,0 +1,86 @@
+@charset "utf-8";
+/* CSS Document */
+
+.paginacao {
+
+	position:relative;
+	clear:both;
+	float:left;
+	margin-top:20px;
+	margin-bottom:10px;
+	background-color:#f5f5f5;
+	padding-top:2px;
+	padding-bottom:2px;
+
+}
+
+.paginacao span{
+
+	border-left:1px solid #CCCCCC;
+
+}
+
+.paginacao a {
+
+	text-decoration:none;
+	color:inherit;
+
+}
+
+.navPaginacao, .itemPaginacao {
+	
+	
+	display:block;
+	cursor:pointer;
+	font-size:14px;
+	position:relative;
+	float:left;
+	padding-left:2px;
+	margin:1px;
+
+}
+
+
+.navPaginacao:hover, .itemPaginacao:hover {
+	
+	background-color: #d6d6d6;
+	color:#000000;
+	
+}
+
+.navPaginacao-disabled {
+	
+	/* background-color: #cdcdcd; */
+	position:relative;
+	cursor:default;
+	font-size:14px;
+	float:left;
+
+		
+}
+
+.navPaginacao-disabled:hover {
+	
+	/* background-color: #cdcdcd; */
+	position:relative;
+	cursor:default;
+	font-size:14px;
+	float:left;
+	color:inherit;
+	background-color:inherit;
+	
+}
+
+.itemPaginacao-sel {
+	
+	background-color:#0096ff;
+	display:block;
+	cursor:pointer;
+	color:#FFF;
+	font-size:14px;
+	font-weight:bold;
+	width:15px;
+	text-align:center;
+	position:relative;
+	float:left;
+}

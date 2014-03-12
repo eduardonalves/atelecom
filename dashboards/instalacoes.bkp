@@ -1,0 +1,81 @@
+<?
+
+include "../conexao.php";
+
+$campo = simplexml_load_file("../xml/campos.xml");
+
+
+$hoje = date('Ymd');
+
+$idPRODUTO = '1';
+
+$conVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && ((data_marcada LIKE '%".$hoje."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$hoje."%') && status = 'PENDENTE' && tipo_instalacao = 'INTERNA' ORDER BY data ASC");
+
+$numVENDA = mysql_num_rows($conVENDA);
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Instalações</title>
+</head>
+<link rel="stylesheet" type=text/css href="../css/tables.css" />
+
+<body style="font-family:Arial, Helvetica, sans-serif">
+
+<div id="conteudo">
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+
+<tr align="center" style="font-size:12px; color:#999;" height="20px" valign="top">
+<td colspan="100">
+<?
+
+if($numVENDA == '0'){ echo "Nenhuma Instalação Pendente para Hoje!";}
+
+else if($numVENDA == '1'){ echo "<b>1</b> Instalação Pendente para Hoje!";}
+
+else{ echo "<b>".$numVENDA."</b> Instalações Pendentes para Hoje!"; }
+?>
+
+
+</td>
+</tr>
+
+<tr class="tr1" align="center">
+<td width="150px"><?= $campo->cliente ?></td>
+<td><?= $campo->cidade ?></td>
+<td><?= $campo->status ?></td>
+<td></td>
+</tr>
+<?
+$class = "tr2";
+while($VENDA = mysql_fetch_assoc($conVENDA)){
+
+if ($class=="tr2"){ //alterna a cor
+  $class = "tr3";
+} else {
+  $class="tr2";
+}	
+?>
+
+<tr class="<?= $class;?>" align="center" style="text-transform:uppercase">
+<td title="<?= strtoupper($VENDA['nome']);?>"><? echo substr($VENDA['nome'],0,17); if(strlen($VENDA['nome']) > 17){ echo '...';}?></td>
+<td title="<?= strtoupper($VENDA['cidade']);?>"><? echo substr($VENDA['cidade'],0,16); if(strlen($VENDA['cidade']) > 16){ echo '...';}?></td>
+<td><?= $VENDA['status'];?></td>
+<td width="26px" title="Mais Detalhes" style="cursor:pointer"><img src="../img/icone-mais.png" width="13" height="13" onclick="Popup=window.open('../detalhes-venda-clarotv.php?id=<?= $VENDA['id']; ?>','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=630,height=600,left=430,top=30');" /></td>
+</tr>
+
+<tr height="1px" bgcolor="#CCC">
+<td colspan="100"></td>
+</tr>
+
+
+<? } ?>
+
+</table>
+</div>
+
+</body>
+</html>

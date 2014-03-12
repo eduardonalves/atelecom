@@ -1,0 +1,40 @@
+body { margin: -110px 0 0 -45px; font-family: Tahoma, Arial, Verdana; font-size: 12px; 	color: black; }
+
+#legenda{position:absolute; width:100%; color:#565656; top:215px; left:0px; height:20px; font-size:10px; background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+}
+
+
+#legenda1{position:absolute; width:100%; color:#565656; top:195px; left:0px; height:20px; font-size:10px; background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+}
+
+.qdr1{ position:absolute; left:10px; top:4px; border:1px solid #E00; width:10px; height:10px; background-color:#F00;}
+.leg1{ position:absolute; left:25px; color:#565656; font-weight:bold; font-size:12px; top:2px;}
+
+.qdr2{ position:absolute; left:115px; top:4px; border:1px solid #E50; width:10px; height:10px; background-color:#F60;}
+.leg2{ position:absolute; left:130px; color:#565656; font-weight:bold; font-size:12px; top:2px;}
+
+.qdr3{ position:absolute; left:230px; top:4px; border:1px solid #EE8D00; width:10px; height:10px; background-color:#FF9E01;}
+.leg3{ position:absolute; left:245px; color:#565656; font-weight:bold; font-size:12px; top:2px;}
+
+.qdr4{ position:absolute; left:10px; top:4px; border:1px solid #EBC101; width:10px; height:10px; background-color:#FCD202;}
+.leg4{ position:absolute; left:25px; color:#565656; font-weight:bold; font-size:12px; top:2px;}
+
+.qdr5{ position:absolute; left:110px; top:4px; border:1px solid #E7EE00; width:10px; height:10px; background-color:#F8FF01;}
+.leg5{ position:absolute; left:125px; color:#565656; font-weight:bold; font-size:12px; top:2px;}
+
+.qdr6{ position:absolute; left:230px; top:4px; border:1px solid #A0CD08; width:10px; height:10px; background-color:#B0DE09;}
+.leg6{ position:absolute; left:245px; color:#565656; font-weight:bold; font-size:12px; top:2px;}

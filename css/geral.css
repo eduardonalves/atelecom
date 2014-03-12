@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+#ui-datepicker-div{display:none;}
+.close{position:absolute; right:6px; top:3px; font-size:12px; background: none repeat scroll 0 0 #B6B6B6;
+	border-radius: 15px;
+	color: #FFFFFF;
+	float: right;
+	height: 15px;
+	line-height: 15px;
+	padding: 3px;
+	margin-top:4px;
+	text-align: center;
+	width: 15px;
+	cursor:pointer;}
+
+#pagina{ position:relative; width:100%; left:0%; margin: 0 0 0 0; top:0px; background-color:#FFF;}
+
+#topobg{height:155px; background:url(../img/HeaderBg2.jpg) top no-repeat;} 
+#topo{position:absolute; width:1000px; margin: 0 0 0 -500px; left:50%;}
+
+#usuario{position:absolute; top:0px; background:#f6f6f6; min-width:50px; right:5px; border:1px solid #f6f6f6; z-index:100;}
+
+#usuario:hover{background:#FFF; cursor:pointer; border: 1px solid #CCC;}
+
+#opcoes{height:0px; opacity:0;}
+
+#menu{position:absolute; top:114px; margin:0 auto; width:100%;} 
+
+.menu{color:#005069; font-weight:bold; font-size:14px; padding-bottom:24px; margin-top:-5px; /*padding-top:16px;*/ height: 50px;}
+
+.menu:hover {background: #e6f2f6; /* Old browsers */
+background: -moz-linear-gradient(top,  #e6f2f6 0%, #ffffff 82%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e6f2f6), color-stop(82%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #e6f2f6 0%,#ffffff 82%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #e6f2f6 0%,#ffffff 82%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #e6f2f6 0%,#ffffff 82%); /* IE10+ */
+background: linear-gradient(to bottom,  #e6f2f6 0%,#ffffff 82%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f2f6', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */}
+
+.menuselected{cursor:default; color:#FFF; font-weight:bold;  font-size:14px; background-color:#0079a2; padding-bottom:24px; margin-top:-5px; /*padding-top:16px;*/ height: 50px;}
+
+
+.submenu{background:url(../img/submenu-bg.png) repeat-x; height:36px; color:#FFF; font-size:14px; text-transform:uppercase;}
+.submenuselected{background:url(../img/submenu-bg-selected.png) repeat-x; color:#0079a2; font-weight:bold;}
+
+.menulateral{background:url(../img/menulateral-bg.png) repeat-y; font-size:12px; color:#555; text-transform:uppercase;}
+.menulateralselected{background:url(../img/menulateral-bg-selected.png) repeat-y; font-size:12px; color:#555; font-weight:bold;}
+
+
+#conteudo{ position:relative; min-height:400px; width:100%; background-color:#FFF; background:url(../img/bg-pagina.jpg) center repeat-y;}
+
+.opcoes:hover{font-weight:bold;}
+
+
+#rodape{position:relative; background:url(../img/rodape-bg.png) repeat-x; width:100%; text-align:center;  height:34px; background-color:#ededed; }
+
+.rodape{font-size:12px; color:#a7a7a7;}
+
+.campoobrigatorio{ font-size:12px; color:#06C; cursor:default;}

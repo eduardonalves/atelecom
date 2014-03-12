@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf8"?>
+
+
+<campos>
+<!-- Dados Cadastrais -->
+<os>OS</os>
+<proposta>Proposta</proposta>
+<contrato>Contrato</contrato>
+
+<!-- Dados do Cliente -->
+<pessoa>Pessoa</pessoa>
+<nome>Nome</nome>
+<cliente>Cliente</cliente>
+<nascimento>Nascimento</nascimento>
+<cpf>CPF</cpf>
+<rg>RG</rg>
+<org_exp>Org.Exp.</org_exp>
+<profissao>Profissão</profissao>
+<sexo>Sexo</sexo>
+<estado_civil>Estado Civil</estado_civil>
+<email>Email</email>
+<telefone>Telefone</telefone>
+
+<!-- Endereço de Instalação -->
+<endereco>Endereço</endereco>
+<numero>Nº</numero>
+<lote>Lote</lote>
+<quadra>Quadra</quadra>
+<complemento>Complemento</complemento>
+<bairro>Bairro</bairro>
+<cidade>Cidade</cidade>
+<uf>UF</uf>
+<cep>CEP</cep>
+<ponto_referencia>Ponto de Referência</ponto_referencia>
+
+
+<!-- Daodos do Vendedor -->
+<operador>Operador</operador>
+<monitor>Monitor</monitor>
+<auditor>Auditor</auditor>
+<gravacao>Gravação</gravacao>
+<obs_gravacao>Obs. Gravação</obs_gravacao>
+
+
+<!-- Dados da Venda -->
+<plano>Plano</plano>
+<pacotes_e_canais_adicionais>Pacotes e Canais Adicionais</pacotes_e_canais_adicionais>
+<pontos>Pontos Adi.</pontos>
+<vencimento>Vencimento</vencimento>
+<valor>Valor</valor>
+<pagamento>Pagamento</pagamento>
+<banco>Banco</banco>
+<agencia>AG</agencia>
+<conta_corrente>CC</conta_corrente>
+<data>Data da Venda</data>
+<data_desejada>Data Desejada</data_desejada>
+<data_marcada>Agendamento</data_marcada>
+<reagendamento>Reagendamento</reagendamento>
+
+
+
+<!-- Dados da Instalação -->
+<obs>Obs.</obs>
+<data_instalacao>Data Instalada</data_instalacao>
+<qs>QS</qs>
+<nivel>Nível</nivel>
+<decoder>Decoder</decoder>
+<certidao>Certidão</certidao>
+<smart>Smart</smart>
+<quality_nota>Quality Nota</quality_nota>
+<tipo_instalacao>Tipo de Instalação</tipo_instalacao>
+<pagamento_instalacao>Pagamento Instalação</pagamento_instalacao>
+<tecnico>Técnico</tecnico>
+
+
+<!-- Status -->
+<status>Status</status>
+<motivo_cancelamento>Motivo</motivo_cancelamento>
+
+
+</campos>
