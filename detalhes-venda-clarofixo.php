@@ -255,7 +255,8 @@ if($editar == '1' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && $_POST['data
 	if($_POST['status'] == 'FINALIZADA')
 	{
 
-		$data_finalizada = $_POST['datainstalacao'];
+		$data_finalizada = explode('/',$_POST['datainstalacao']);
+		$data_finalizada = $data_finalizada[2].$data_finalizada[1].$data_finalizada[0];  
 
 	}else{
 

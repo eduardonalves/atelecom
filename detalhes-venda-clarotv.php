@@ -410,7 +410,29 @@ else { $status = $_POST['status']; }
 ////////////////////////
 // Salvar Instalação //
 //////////////////////
-if($editar == '1' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && $_POST['datainstalacao']!='')
+if($status == 'CONECTADO'){
+
+
+if(strlen($_POST['datainstalacao']) >= 8){ 
+
+$data_instalacao0 = explode('/',$_POST['datainstalacao']);
+$data_instalacao = $data_instalacao0[2].$data_instalacao0[1].$data_instalacao0[0];
+
+}
+
+else{
+
+if($linha['data_instalacao'] == ''){ $data_instalacao = date("Ymd"); } else { $data_instalacao = $linha['data_instalacao']; } 
+
+
+}
+
+
+}
+
+else { $data_instalacao = $linha['data_instalacao']; } 
+
+/*if($editar == '1' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && $_POST['datainstalacao']!='')
 {
 
 	if($_POST['status'] == 'CONECTADO')
@@ -438,7 +460,7 @@ if($editar == '1' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && $_POST['data
 	}
 }
 
-
+*/
 /* *** antigo ********
 if($status == 'CONECTADO'){
 
