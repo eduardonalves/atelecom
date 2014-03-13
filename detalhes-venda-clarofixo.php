@@ -598,13 +598,13 @@ if($_POST['status'] == strtoupper('FINALIZADA') && ($_POST['agendaentrega'] == "
 	
 		if($_POST['tipoEntrega']=='EMBRATEL')
 		{
-			$excep = array("lote", "quadra", "complemento", "os", "esn", "novonumero");
+			$excep = array("lote", "quadra", "complemento", "os", "esn", "novonumero", "rg", "itelefone2", "tipotel2", "itelefone3", "tipotel3", "email");
 			validarCampos($campos, $excep);
 			
 
 		}elseif ($_POST['tipoEntrega']=='PRONTA ENTREGA') {
 			
-			$excep = array("lote", "quadra", "complemento");
+			$excep = array("lote", "quadra", "complemento", "rg", "itelefone2", "tipotel2", "itelefone3", "tipotel3", "email");
 			validarCampos($campos, $excep);
 			
 			
