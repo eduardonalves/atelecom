@@ -1,31 +1,206 @@
 
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.Jcrop.min.js"></script>
+<script src="js/jquery.Jcrop.js"></script>
+<link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+
+<script type="text/javascript">
+
+//Script para Preview e Corte da foto do usuário
+
+var api;
+var cropWidth = 40;
+var cropHeight = 40;
+var img_input, init_coords;
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        img_input = false;
+        init_coords = true;
+
+        reader.onload = function (e) {
+			
+			if(api){
+				$(function(){
+					api.destroy();
+					});
+				}
+				
+				$('#cropbox').attr('src','');
+
+				$('#cropbox').css('width', 'auto');
+				$('#cropbox').css('height', 'auto');
+				$('#cropbox').css('max-width', '250px');
+				$('#cropbox').attr('src', e.target.result);
+				$("#cropbox").css('visibility', 'visible')
+				
+				img_input = true;
+				
+                $(function(){
+				
+				// inicializa JCrop
+				$('#cropbox').Jcrop({
+                    aspectRatio: 1,
+                    onSelect: updateCoords
+                },function(){
+					api = this;
+				});
+
+				// seta a área de seleção
+				api.animateTo([0,0,cropWidth,cropHeight]);
+				
+				});
+				
+
+			}
+
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+//Verifica se uma foto foi adicionada e chama readURL
+$(function(){
+	$("#foto_input").change(function(){
+		readURL(this);
+	});
+});
+
+//atualiza coordenadas
+function updateCoords(c)
+{
+    $('#x').val(c.x);
+    $('#y').val(c.y);
+    $('#w').val(c.w);
+    $('#h').val(c.h);
+    init_coords = false;
+};
+ 
+//verifica se a foto foi selecionada para corte
+function checkCoords()
+{
+	if(img_input){
+		if(parseInt($('#w').val()) && !init_coords) return true;
+		alert('Selecione a região para recortar.');
+		return false;
+	}
+};
+
+</script>
+
 <?
+
 header("Content-type: text/html; charset=UTF-8", true);
 if(isset($_POST['nome'])){
-	
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$senha = md5($_POST['senha']);
 
+if(!$_POST['nome'] || !$_POST['email'] || !$_POST['senha']){
 
-if(!$nome || !$email || !$senha){
-	
 ?>
 
 <script type="text/javascript">
 
 window.alert("ERRO: Todos os campos devem ser preenchidos");
 
-
 </script>
 
 <?	
 	
 }else{
+	
+$nome = $_POST['nome'];
+$email = $_POST['email'];
+$senha = md5($_POST['senha']);
+extract($_FILES);
 
+// Validação da foto - INÍCIO
+		
+		if (! empty($foto['name'])) {
+		
+			if (! preg_match('/^image\/(jpeg|jpg)$/', $foto["type"])) {
+				?>
+				<script type="text/javascript">
 
+				window.alert("ERRO: Formato não suportado (formatos aceitos: JPG, JPEG).");
+
+				</script>
+				<?
+				die();
+			}
+		
+		//Pega extensão da foto
+		//preg_match('/\.(jpeg|jpg){1}$/i', $foto['name'], $ext);
+		
+		$ext = "jpg";
+		
+		//Gera um nome único para a imagem
+		$nome_imagem = md5(uniqid(time()));
+		$nome_imagem_completo = $nome_imagem . "." . $ext;
+		
+		//Destino da imagem
+		$caminho_imagem = "img/fotos/" . $nome_imagem_completo;
+		
+		//Faz o upload da imagem para seu respectivo caminho
+		move_uploaded_file($foto["tmp_name"], $caminho_imagem);
+		
+		//INÍCIO TRATAMENTO DA FOTO
+		
+		//obtém a imagem recortada pelo usuário a partir das coordenadas fornecidas, redimensionando caso seja necessário
+	
+		if($foto["type"]=="image/jpeg" || $foto["type"]=="image/jpg"){
+				$img_antiga = imagecreatefromjpeg($caminho_imagem);
+			}
+
+		$x = imagesx($img_antiga);
+		$y = imagesy($img_antiga);
+		
+		$img_recorte = imagecreatetruecolor(150,150);
+		
+		if($x>250){
+			$largura = 250;
+			$altura = (int) (($largura * $y) / $x);
+			$img_antiga_r = imagecreatetruecolor($largura, $altura);
+			imagecopyresampled($img_antiga_r,$img_antiga,0,0,0,0, $largura, $altura, $x, $y);
+			imagecopyresampled($img_recorte,$img_antiga_r,0,0,$_POST['x'],$_POST['y'], 150, 150,$_POST['w'],$_POST['h']);
+			}
+		else{
+			imagecopyresampled($img_recorte,$img_antiga,0,0,$_POST['x'],$_POST['y'], 150, 150,$_POST['w'],$_POST['h']);
+			}
+		
+		//Pega as dimensões originais do recorte
+		$x = imagesx($img_recorte);
+		$y = imagesy($img_recorte);
+			
+		//Define as dimensões finais da imagem
+		$largura = 40;
+		$altura = (int) (($largura * $y) / $x);
+		
+		//Redimensiona para 40x40
+		
+		$img_nova = imagecreatetruecolor($largura,$altura);
+		imagecopyresampled($img_nova, $img_recorte, 0, 0, 0, 0, $largura, $altura, $x, $y);
+		$img_nova2 = imagecreatetruecolor(40,40);
+		imagecopyresampled($img_nova2, $img_nova, 0, 0, 0, 0, $largura, $altura, 40, 40);
+			
+		if($foto["type"]=="image/jpeg" || $foto["type"]=="image/jpg"){
+			imagejpeg($img_nova2, $caminho_imagem, 100);	
+		}
+				
+		imagedestroy($img_nova);
+		imagedestroy($img_nova2);
+		imagedestroy($img_recorte);
+		imagedestroy($img_antiga);
+		
+		//FIM DO TRATAMENTO DA FOTO
+		
+		$inserir = $conexao->query("UPDATE usuarios SET nome = '".$nome."', email = '".$email."', senha = '".$senha."', foto = '".$nome_imagem."' WHERE id = '".$USUARIO['id']."'") or die("Erro ao atualizar os dados!");
+		
+		}
+else
+{
 $inserir = $conexao->query("UPDATE usuarios SET nome = '".$nome."', email = '".$email."', senha = '".$senha."' WHERE id = '".$USUARIO['id']."'") or die("Erro ao atualizar os dados!");
-
+}
 ?>
 
 <script type="text/javascript">
@@ -33,6 +208,7 @@ $inserir = $conexao->query("UPDATE usuarios SET nome = '".$nome."', email = '".$
 window.alert("Configurações realizadas com sucesso!");
 
 window.location = '?p=configuracoes';
+
 </script>
 
 <?
@@ -108,15 +284,14 @@ input[type="submit"]:active{ background:#ededed;}
 <td> &nbsp;  &nbsp; <?= $es3; ?></td>
 </tr>
 
-
 <? if($USUARIO['tipo_usuario'] == 'ADMINISTRADOR'){?>
 <tr  height="35px" style="cursor:pointer" onclick="window.location='?p=<?= $_GET['p'];?>&m=<?= $_GET['m'];?>&an=<?= $_GET['an'];?>&es=5'"  class="<? if($_GET['es'] == '5'){ ?>menulateralselected<? } else { ?>menulateral<? } ?>">
 <td> &nbsp;  &nbsp; <?= $es5; ?></td>
 </tr>
 <? } ?>
 
-<!--  if invalidado para desabilitar modulo qualidade -->
-<? if($USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && 1==2){?>
+
+<? if($USUARIO['tipo_usuario'] == 'ADMINISTRADOR'){?>
 <tr  height="35px" style="cursor:pointer" onclick="window.location='?p=<?= $_GET['p'];?>&m=<?= $_GET['m'];?>&an=<?= $_GET['an'];?>&es=4'"  class="<? if($_GET['es'] == '4' || $_GET['es'] == '4-update'){ ?>menulateralselected<? } else { ?>menulateral<? } ?>">
 <td> &nbsp;  &nbsp; <?= $es4; ?></td>
 </tr>
@@ -136,12 +311,14 @@ input[type="submit"]:active{ background:#ededed;}
 
 <table width="1000px" border="0" align="center">
 
-<form name="config" action="" method="post">
+<form name="config" action="" method="post" enctype="multipart/form-data" onsubmit="return checkCoords();">
 <tr height="60px" valign="bottom" align="left">
 <td colspan="2" style=" font-size:18px; color:#999; font-weight:bold">Configura&ccedil;&otilde;es <hr size="1" color="#CCCCCC" /></td>
 </tr>
 
-
+</table>
+<div style="width: 700px; float: left;">
+<table width="700px" border="0" align="left">
 <tr align="left">
 <td>Nome:</td>
 <td><input type="text" name="nome" value="<?= $USUARIO['nome']; ?>" size="40"></td>
@@ -151,8 +328,6 @@ input[type="submit"]:active{ background:#ededed;}
 <td>Email:</td>
 <td><input type="text" name="email" value="<?= $USUARIO['email']; ?>" size="40"></td>
 </tr>
-
-
 
 <tr align="left">
 <td>Login:</td>
@@ -164,14 +339,30 @@ input[type="submit"]:active{ background:#ededed;}
 <td><input type="password" name="senha" value="" size="40"></td>
 </tr>
 
+<tr align="left" height="40px" style="line-height: 40px;">
+<td>Trocar Foto:</td>
+<td><input type="file" id="foto_input" name="foto" size="25" /></td>
+</tr>
+
 <tr height="50px" valign="bottom" align="left">
 <td></td>
 <td><input type="submit" name="salvar" value="Salvar" /></td>
 </tr>
+
+<input type="hidden" id="x" name="x" />
+<input type="hidden" id="y" name="y" />
+<input type="hidden" id="w" name="w" />
+<input type="hidden" id="h" name="h" />
+
 </form>
 </table>
+</div>
+<div style="width: 250px; float: right; margin-right:20px">
+<img src="#" id="cropbox" style="visibility: hidden;"/>
+</div>
+</td>
+</tr></table>
 
-</td></tr></table>
 </center>
 
 <? } else if($_GET['es'] == '2' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR'){ include "definir-metas.php"; } 

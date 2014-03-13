@@ -23,8 +23,6 @@
       theme:        "custom",
       field:        "file",
       data:         "time",
-      venda_id:     "",
-      user_id:		"",
       multi:        true,
       showFilename:       true,
       showPercent:        true,
@@ -38,19 +36,13 @@
     };
 
     var options = $.extend(defaults, options);
-	
-	  $.fn.newData = function(ndata){
 
-    // default configuration properties
-		options.data = ndata;
-    };
     //Main function
     var obj;
     var file = new Object();
     var fileinput = this;
     this.each(function() {
       obj = $(this);
-      
       //HTML code depends of theme
       if (options.theme == "bootstrap"){
       var html = '<a href="javascript:void(0)" class="btn btn-primary btn-upload"> <span class="icon-upload icon-white"></span> '+options.btnText+'</a><div class="pekecontainer"></div>';
@@ -95,9 +87,6 @@
       var formData = new FormData();
       formData.append(options.field, obj[0].files[0]);
       formData.append('data', options.data);
-      formData.append('venda_id', options.venda_id);
-      formData.append('user_id', options.user_id);
-      
       $.ajax({
             url: options.url,
             type: 'POST',

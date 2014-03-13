@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <?php
 
@@ -8,8 +9,7 @@ require_once "conexao.php";
 	if( $_POST['action']=='add' )
 	{
 		extract($_POST);
-		
-		
+		extract($_FILES);
 			
 		// ###################### ROTINAS DE VALIDACAO DE DADOS ###################
 			
@@ -26,19 +26,17 @@ require_once "conexao.php";
 			
 		}
 			
-		
 		if (! preg_match('/^[^0-9][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[.][a-zA-Z]{2,4}$/', $email) && $email!='') {
 			
 			array_push($erros, 'Endereço de email inválido.');
 		}
-
-		
+	
 		if( count($erros) == 0 )
 		
 		{
-			$senha = md5($senha);
-			$sqlquery = "INSERT INTO usuarios (nome, login, grupo, supervisor, email, sexo, tipo_usuario, acesso_usuario, status, senha) 
-			VALUES('$nome', '$login', '$grupo', '$supervisor', '$email', '$sexo', '$tipo_usuario', '$acesso_usuario', '$status', '$senha')";
+
+			$sqlquery = "INSERT INTO usuarios (nome, login, grupo, supervisor, email, sexo, tipo_usuario, acesso_usuario, status) 
+			VALUES('$nome', '$login', '$grupo', '$supervisor', '$email', '$sexo', '$tipo_usuario', '$acesso_usuario', '$status')";
 			
 			$conInsert = $conexao->query($sqlquery);
 			
@@ -46,11 +44,10 @@ require_once "conexao.php";
 			{
 				array_push($erros, 'Erro ao cadastrar usuário.');
 			}
-		
+			
 		}
 
 		result_page($erros);
-
 		
 		//header('Location: ' . $_SERVER['HTTP_REFERER']);
 
@@ -77,15 +74,15 @@ require_once "conexao.php";
 				array_push($erros, 'Já existe um usuário para o login digitado.');
 			}
 			
-			if (! preg_match('/^[a-za-zA-Z\d_]{4,}[a-za-zA-Z\d_\.]*$/i', $login)) { 
+			if (! preg_match('/^[a-za-zA-Z\d_]{4,}[a-za-zA-Z\d_\.]*$/i', $login)) {
 				
-				array_push($erros, 'Nome de usuário inválido. Mínimo de quatro caracteres e que sejam alfanuméricos ou ponto (.).');
+				array_push($erros, 'Login inválido. Mínimo de quatro caracteres e que sejam alfanuméricos ou ponto (.).');
 			
 			}
 			
 		}
 		
-		if (! preg_match('/^[^0-9][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[.][a-zA-Z]{2,4}$/', $email) && $email!='') {
+		if (! preg_match('/^[^0-9][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[.][a-zA-Z]{2,4}$/', $email) && $email=='') {
 			
 			array_push($erros, 'Endereço de email inválido.');
 		}
@@ -117,10 +114,9 @@ require_once "conexao.php";
 
 <?php function result_page($erros) {?>
 
-	
 	<?php if(count($erros)==0) { ?>
-	
-	<meta http-equiv="refresh" content="5;url=<?php echo $_SERVER['HTTP_REFERER']; ?>"> 
+
+	<meta http-equiv="refresh" content="3;url=<?php echo $_SERVER['HTTP_REFERER']; ?>">
 	
 	<table align="center" height="90%" width="60%" valign="middle" style="background-color:#EFEBEB; border: 1px solid #BFBFBF;" >
 	
@@ -129,7 +125,7 @@ require_once "conexao.php";
 		</tr>
 
 		<tr style="font-family:arial; font-size:12px; color:#4D4D4D;" valign="middle">
-			<td align="center">Aguarde você será redirecionado dentro de 5 segundos...</td>
+			<td align="center">Aguarde você será redirecionado dentro de 3 segundos...</td>
 		</tr>
 	
 	</table>
@@ -169,15 +165,16 @@ require_once "conexao.php";
 
 <?php } ?>
 <!-- INSERIR -->
+
 <link rel="stylesheet" href="css/tables.css" />
-<form name="novousuario" action="lista-usuarios.php" method="post">
+<form name="novousuario" action="lista-usuarios.php" enctype="multipart/form-data" method="post">
 
 <input type="hidden" name="action" value="add" />
 
 <br/ ><br />
 <table border="0" width="900px"style="color:#999; font-size:14px;" align="center">
 <tr>
-	<td colspan="2" style="color:#999; font-size:18px;">Inserir Usuarios</td>
+	<td colspan="2" style="color:#999; font-size:18px;">Inserir Usuários</td>
 </tr>
 
 
@@ -228,12 +225,12 @@ require_once "conexao.php";
 <tr>
 	<td>Email: </td>
 	<td>Sexo:</td>
-	<td>Tipo de Usu&aacute;rio:</td>
-	<td colspan="2">Acesso de Usu&aacute;rio:</td>
+	<td>Tipo de Usuário:</td>
+	<td colspan="2">Acesso de Usuário:</td>
 </tr>
 <tr>
 	<td>
-		<input type="text" name="email"  onKeyPress="mascara(this,data)" maxlength="10" value="" placeholder="usuario@host.com.br">
+		<input type="text" name="email"  onKeyPress="mascara(this,data)" maxlength="35" value="" placeholder="usuario@host.com.br">
 	</td>
 	<td>
 		<select name="sexo">
@@ -273,7 +270,6 @@ require_once "conexao.php";
 </tr>
 
 <tr>
-	<td>Foto: </td>
 	<td>Senha:</td>
 	<td>Status:</td>
 	<td colspan="2"></td>
@@ -282,7 +278,6 @@ require_once "conexao.php";
 
 <tr>
 	
-	<td><input type="file" id="foto" name="foto" size="15" /></td>
 	<td><input type="password" id="senha" name="senha" value="" size="15" /></td>
 	<td>
 		<select name="status">
@@ -291,7 +286,7 @@ require_once "conexao.php";
 		<option value="DESLIGADO" <? if($OPERADOR['statusoperador'] == 'DESLIGADO'){ ?>selected="selected" <? } ?>>DESLIGADO</option>
 		</select>
 	</td>
-
+	<td colspan="1"></td>
 	<td><img src="img/icone-salvar.png" width="20" style="cursor:pointer" title="Salvar" onclick="javascript:document.novousuario.submit();" /></td>
 	<td align="left" width="100%" style="cursor:pointer" title="Salvar" onclick="javascript:document.novousuario.submit();">Salvar</td>
 
