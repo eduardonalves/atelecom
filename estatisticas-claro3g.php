@@ -516,7 +516,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <!-- SUBMENU -->
 
-<? include "submenu-clarofixo.php";?>
+<? include "submenu-claro3g.php";?>
 
 <!-- FIM DO SUBMENU -->
 
