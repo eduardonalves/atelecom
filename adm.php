@@ -47,9 +47,9 @@ include_once "lib/class.VendaStatus.php";
 // ---->>>>>>>> atualiza logon aquiii
 
 
-$genLogon = new Logon($conexao);
-$genLogon->tempo_expiracao = 60; // Tempo em minutos para expiracao de login
-$genLogon->atualizarLogon($_SESSION['lgnid'], $USUARIO['login'], $USUARIO['nome']);
+//$genLogon = new Logon($conexao);
+//$genLogon->tempo_expiracao = 60; // Tempo em minutos para expiracao de login
+//$genLogon->atualizarLogon($_SESSION['lgnid'], $USUARIO['login'], $USUARIO['nome']);
 
 
 

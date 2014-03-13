@@ -1,21 +1,14 @@
 <?
-
-
 // Verificar se está logado
 
 if(!isset($_SESSION['usuario'])){ ?>
 
-	
 
 <script type="text/javascript">
 
 <!-- window.location = 'index.php' -->
 
-</script>	
-
-	
-
-	
+</script>
 
 <? } 
 
@@ -24,15 +17,10 @@ if(!isset($_SESSION['usuario'])){ ?>
 $campo = simplexml_load_file("xml/campos.xml");
 
 
-
-
-
 if($_GET['me'] != "" && $_GET['me'] != "todos"){ $mes = $_GET['me']; } else if($_GET['me'] == "todos"){ $mes = "";} else if($_GET['me'] == ""){$mes = date("m");}
 
 
-
 if($_GET['an'] == "todos"){ $ano = "";} else if($_GET['an'] != ""){ $ano = $_GET['an']; } else {$ano = date("Y");}
-
 
 
 $ordem = $_GET['o'];
@@ -88,10 +76,6 @@ $de0 = explode('/',$_GET['de']);
 
 $dataentrega = $de0[2].$de0[1].$de0[0];
 
-
-
-
-
 ///////////////////////////////////////////
 //////////////////////////////////////////
 
@@ -103,7 +87,7 @@ if(isset($_POST['chk'])){
 
 $set_colunas = $conexao->query("UPDATE usuarios SET colunas_clarofixo = '(".$_POST['chk1'].") (".$_POST['chk2'].") (".$_POST['chk3'].") (".$_POST['chk4'].") (".$_POST['chk5'].") (".$_POST['chk6'].") (".$_POST['chk7'].") (".$_POST['chk8'].") (".$_POST['chk9'].") (".$_POST['chk10'].") (".$_POST['chk11'].") (".$_POST['chk12'].") (".$_POST['chk13'].") (".$_POST['chk14'].") (".$_POST['chk15'].") (".$_POST['chk16'].") (".$_POST['chk17'].") (".$_POST['chk18'].") (".$_POST['chk19'].") (".$_POST['chk20'].") (".$_POST['chk21'].") (".$_POST['chk22'].") (".$_POST['chk23'].") (".$_POST['chk24'].") (".$_POST['chk25'].") (".$_POST['chk26'].") (".$_POST['chk27'].") (".$_POST['chk28'].") (".$_POST['chk29'].")' WHERE id = '".$USUARIO['id']."'");
 
-?>	
+?>
 
 
 
@@ -113,19 +97,9 @@ window.location = '?p=<?= $_GET['p'];?>'
 
 </script>
 
-
-
-
-
 <? }?>
 
-
-
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-
 
 <script type="text/javascript" src="js/jquery.js"></script>
 
@@ -453,53 +427,56 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <td width="50%"><input type="checkbox" name="chk13" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_finalizada)')){?>checked="checked"<? } ?> value="data_finalizada" /> Data Finalizada</td>
 
-<td width="50%"><input type="checkbox" name="chk14" <? if(strstr($USUARIO['colunas_clarofixo'],'(status)')){?>checked="checked"<? } ?> value="status" /> Status Auditoria</td>
+<td width="50%"><input type="checkbox" name="chk13" <? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>checked="checked"<? } ?> value="ultimo_envio_documentos" /> Data Env. Doc.</td>
 
 </tr>
 
 <tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk14" <? if(strstr($USUARIO['colunas_clarofixo'],'(status)')){?>checked="checked"<? } ?> value="status" /> Status Auditoria</td>
 
 <td width="50%"><input type="checkbox" name="chk15" <? if(strstr($USUARIO['colunas_clarofixo'],'(pagamento)')){?>checked="checked"<? } ?> value="pagamento" /> Pagamento</td>
 
-<td width="50%"><input type="checkbox" name="chk16" <? if(strstr($USUARIO['colunas_clarofixo'],'(aparelho)')){?>checked="checked"<? } ?> value="aparelho" /> Aparelho</td>
-
 </tr>
 
 <tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk16" <? if(strstr($USUARIO['colunas_clarofixo'],'(aparelho)')){?>checked="checked"<? } ?> value="aparelho" /> Aparelho</td>
 
 <td width="50%"><input type="checkbox" name="chk17" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_cancelamento)')){?>checked="checked"<? } ?> value="motivo_cancelamento" /> Motivo Cancelamento</td>
 
-<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo Restrição</td>
-
 </tr>
 
 <tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo Restrição</td>
 
 <td width="50%"><input type="checkbox" name="chk19" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_devolvido)')){?>checked="checked"<? } ?> value="motivo_devolvido" /> Motivo Devolvido</td>
 
-<td width="50%"><input type="checkbox" name="chk20" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_liberacao)')){?>checked="checked"<? } ?> value="data_liberacao" /> Data Liberação</td></tr>
-
 <tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk20" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_liberacao)')){?>checked="checked"<? } ?> value="data_liberacao" /> Data Liberação</td>
 
 <td width="50%"><input type="checkbox" name="chk21" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_entrega)')){?>checked="checked"<? } ?> value="data_entrega" /> Data Entrega</td>
 
+</tr>
+
+<tr align="left">
+
 <td width="50%"><input type="checkbox" name="chk22" <? if(strstr($USUARIO['colunas_clarofixo'],'(cep)')){?>checked="checked"<? } ?> value="cep" /> CEP</td>
 
+<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_clarofixo'],'(pendencia)')){?>checked="checked"<? } ?> value="pendencia" /> Pendência</td>
 </tr>
 
 <tr align="left">
-<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_clarofixo'],'(pendencia)')){?>checked="checked"<? } ?> value="pendencia" /> Pendência</td>
 
 <td width="50%"><input type="checkbox" name="chk24" <? if(strstr($USUARIO['colunas_clarofixo'],'(tipo_venda)')){?>checked="checked"<? } ?> value="tipo_venda" /> Tipo Venda</td>
-</tr>
 
-<tr align="left">
 <?php /* <td width="50%"><input type="checkbox" name="chk25" <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_gravacao)')){?>checked="checked"<? } ?> value="agendamento_gravacao" /> Agend. Gravação</td> */ ?>
 
 <td width="50%"><input type="checkbox" name="chk26" <? if(strstr($USUARIO['colunas_clarofixo'],'(novo_numero)')){?>checked="checked"<? } ?> value="novo_numero" /> Novo Número</td>
+
 </tr>
-
-
 
 <?php /* <!-- CODIGO COM MODULO STATUS PORTAL ###########
 <tr align="left">
@@ -521,8 +498,6 @@ box-shadow:  0px 0px 10px 2px #999;
 <td colspan="2" width="50%"><input type="checkbox" name="chk27" <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_entrega)')){?>checked="checked"<? } ?> value="agendamento_entrega" /> Agend. Entrega</td>
 </tr>
 
-
-
 <tr align="left" height="40px" valign="bottom">
 
 <td><img src="img/salvar.png" onClick="javascript:document.forms.colunas.submit();" width="100" style="cursor:pointer" /></td>
@@ -538,15 +513,7 @@ box-shadow:  0px 0px 10px 2px #999;
 </center>
 
 
-
-
-
 </div>
-
-
-
-
-
 
 
 <!-- SUBMENU -->
@@ -556,11 +523,6 @@ box-shadow:  0px 0px 10px 2px #999;
 <!-- FIM DO SUBMENU -->
 
 
-
-
-
-
-
 <br />
 
 <br />
@@ -568,12 +530,6 @@ box-shadow:  0px 0px 10px 2px #999;
 
 
 <center>
-
-
-
-
-
-
 
 <form name="filtro" method="get">
 
@@ -757,7 +713,7 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 
 <option value=""></option>
 <?php 
-
+/*
 	$venda = new Venda();
 	$venda->Status->produtoId = 3;
 	
@@ -768,7 +724,8 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 	?>
 		<option value="<?php echo $key; ?>" <? if($_GET['s'] == "$key"){?>selected="selected"<? }?>><?php echo $status; ?></option>
    <?php 
-	}
+	
+	*/
 ?>
 
 </select>
@@ -930,7 +887,6 @@ include "includes/filtro-clarofixo.php";
 ?>
 
 
-
 <table border="0" width="1000px" onmouseover="loadsize(document.getElementById('pagesize').innerHTML);">
 
 <tr align="left">
@@ -999,11 +955,6 @@ include "includes/filtro-clarofixo.php";
 <span style="font-size:13px">Mostrar: </span>
 
 
-
-
-
-
-
 <select name="m" onchange="javascript:document.forms.mostrar.submit();">
 
 <option value="15" <? if($_GET['m'] == '15'){?>selected="selected"<? }?>>15</option>
@@ -1016,11 +967,7 @@ include "includes/filtro-clarofixo.php";
 
 </select>
 
-
-
 </form>
-
-
 
 
 
@@ -1032,10 +979,7 @@ include "includes/filtro-clarofixo.php";
 
 
 
-
-
 <hr size="1" color="#CCC" width="1000px" />
-
 
 
 <table border="0" width="1000px" onmouseover="loadsize(document.getElementById('pagesize').innerHTML);">
@@ -1178,6 +1122,12 @@ include "includes/filtro-clarofixo.php";
 <? } ?>
 
 
+<? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>
+
+<td title="Data Env. Doc." onclick="window.location = '?p=clarofixo&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&di2=<?= $_GET['di2']; ?>&tpentrega=<?= $_GET['tpentrega']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'ultimo_envio_documentos ASC' || $_GET['o'] == ''){ echo 'ultimo_envio_documentos ASC'; } else { echo 'ultimo_envio_documentos DESC'; }?>'">Data Env. Doc. <? if($_GET['o'] == 'ultimo_envio_documentos DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'ultimo_envio_documentos ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+
+<? } ?>
+
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(pagamento)')){?>
 
@@ -1290,7 +1240,6 @@ $class = "tr2";
 
 while($VENDA = mysql_fetch_assoc($conVENDA)){
 
-	
 
 $conMONITOR = $conexao->query("SELECT * FROM usuarios WHERE id = '".$VENDA['monitor']."'");	
 
@@ -1485,9 +1434,14 @@ if ($class=="tr2"){ //alterna a cor
 
 <? } ?>
 
+<? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>
 
+<td title="Data Env. Doc." <? if(strstr($_GET['o'],'ultimo_envio_documentos')){ ?>class="tdselected" <? } ?>>
 
+<? if($VENDA['ultimo_envio_documentos'])
+   echo date("d/m/Y", strtotime($VENDA['ultimo_envio_documentos'])); ?>
 
+<? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(pagamento)')){?>
 
@@ -1635,15 +1589,11 @@ $saidaTexto = new Accents( Accents::UTF_8, Accents::ISO_8859_1 );
 </td>
 
 
-
-
-
 <? if($USUARIO['editar_dados'] == 1 || $USUARIO['editar_instalacao'] == 1  || $USUARIO['id']==3179){?>
 
 <td width="26px" title="Editar Dados" style="cursor:pointer"><img src="img/icone-editar.png" width="13" height="13" onclick="Popup=window.open('detalhes-venda-clarofixo.php?e=1&id=<?= $VENDA['id']; ?>','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=630,height=600,left=430,top=30');" /></td>
 
 <? } ?>
-
 
 
 <td width="26px" title="Mais Detalhes" style="cursor:pointer"><img src="img/icone-mais.png" width="13" height="13" onclick="Popup=window.open('detalhes-venda-clarofixo.php?id=<?= $VENDA['id']; ?>','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=630,height=600,left=430,top=30');" /></td>
@@ -1706,7 +1656,7 @@ $numpaginas = ceil($quantreg / $numreg);
 
 $i = 1; while($i <= $numpaginas && $i<=45){
 
- $numpag = $i++;	
+ $numpag = $i++;
 
 
 
