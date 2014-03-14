@@ -427,50 +427,50 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <td width="50%"><input type="checkbox" name="chk13" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_finalizada)')){?>checked="checked"<? } ?> value="data_finalizada" /> Data Finalizada</td>
 
-<td width="50%"><input type="checkbox" name="chk13" <? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>checked="checked"<? } ?> value="ultimo_envio_documentos" /> Data Env. Doc.</td>
+<td width="50%"><input type="checkbox" name="chk14" <? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>checked="checked"<? } ?> value="ultimo_envio_documentos" /> Data Env. Doc.</td>
 
 </tr>
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk14" <? if(strstr($USUARIO['colunas_clarofixo'],'(status)')){?>checked="checked"<? } ?> value="status" /> Status Auditoria</td>
+<td width="50%"><input type="checkbox" name="chk15" <? if(strstr($USUARIO['colunas_clarofixo'],'(status)')){?>checked="checked"<? } ?> value="status" /> Status Auditoria</td>
 
-<td width="50%"><input type="checkbox" name="chk15" <? if(strstr($USUARIO['colunas_clarofixo'],'(pagamento)')){?>checked="checked"<? } ?> value="pagamento" /> Pagamento</td>
-
-</tr>
-
-<tr align="left">
-
-<td width="50%"><input type="checkbox" name="chk16" <? if(strstr($USUARIO['colunas_clarofixo'],'(aparelho)')){?>checked="checked"<? } ?> value="aparelho" /> Aparelho</td>
-
-<td width="50%"><input type="checkbox" name="chk17" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_cancelamento)')){?>checked="checked"<? } ?> value="motivo_cancelamento" /> Motivo Cancelamento</td>
+<td width="50%"><input type="checkbox" name="chk16" <? if(strstr($USUARIO['colunas_clarofixo'],'(pagamento)')){?>checked="checked"<? } ?> value="pagamento" /> Pagamento</td>
 
 </tr>
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo Restrição</td>
+<td width="50%"><input type="checkbox" name="chk17" <? if(strstr($USUARIO['colunas_clarofixo'],'(aparelho)')){?>checked="checked"<? } ?> value="aparelho" /> Aparelho</td>
 
-<td width="50%"><input type="checkbox" name="chk19" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_devolvido)')){?>checked="checked"<? } ?> value="motivo_devolvido" /> Motivo Devolvido</td>
-
-<tr align="left">
-
-<td width="50%"><input type="checkbox" name="chk20" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_liberacao)')){?>checked="checked"<? } ?> value="data_liberacao" /> Data Liberação</td>
-
-<td width="50%"><input type="checkbox" name="chk21" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_entrega)')){?>checked="checked"<? } ?> value="data_entrega" /> Data Entrega</td>
+<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_cancelamento)')){?>checked="checked"<? } ?> value="motivo_cancelamento" /> Motivo Cancelamento</td>
 
 </tr>
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk22" <? if(strstr($USUARIO['colunas_clarofixo'],'(cep)')){?>checked="checked"<? } ?> value="cep" /> CEP</td>
+<td width="50%"><input type="checkbox" name="chk19" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo Restrição</td>
 
-<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_clarofixo'],'(pendencia)')){?>checked="checked"<? } ?> value="pendencia" /> Pendência</td>
+<td width="50%"><input type="checkbox" name="chk20" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_devolvido)')){?>checked="checked"<? } ?> value="motivo_devolvido" /> Motivo Devolvido</td>
+
+<tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk21" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_liberacao)')){?>checked="checked"<? } ?> value="data_liberacao" /> Data Liberação</td>
+
+<td width="50%"><input type="checkbox" name="chk22" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_entrega)')){?>checked="checked"<? } ?> value="data_entrega" /> Data Entrega</td>
+
 </tr>
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk24" <? if(strstr($USUARIO['colunas_clarofixo'],'(tipo_venda)')){?>checked="checked"<? } ?> value="tipo_venda" /> Tipo Venda</td>
+<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_clarofixo'],'(cep)')){?>checked="checked"<? } ?> value="cep" /> CEP</td>
+
+<td width="50%"><input type="checkbox" name="chk24" <? if(strstr($USUARIO['colunas_clarofixo'],'(pendencia)')){?>checked="checked"<? } ?> value="pendencia" /> Pendência</td>
+</tr>
+
+<tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk25" <? if(strstr($USUARIO['colunas_clarofixo'],'(tipo_venda)')){?>checked="checked"<? } ?> value="tipo_venda" /> Tipo Venda</td>
 
 <?php /* <td width="50%"><input type="checkbox" name="chk25" <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_gravacao)')){?>checked="checked"<? } ?> value="agendamento_gravacao" /> Agend. Gravação</td> */ ?>
 
@@ -632,23 +632,23 @@ Ano:
 
 <option value=""></option>
 
-<option value="FAV Local">FAV Local</option>
+<option value="FAV Local" <? if($_GET['t'] == 'FAV Local') { ?> selected <? } ?>>FAV Local</option>
 
-<option value="FAV Local com DDD">FAV Local com DDD</option>
+<option value="FAV Local com DDD" <? if($_GET['t'] == 'FAV Local com DDD') { ?> selected <? } ?>>FAV Local com DDD</option>
 
-<option value="FAV Local e DDD">FAV Local e DDD</option>
+<option value="FAV Local e DDD" <? if($_GET['t'] == 'FAV Local e DDD') { ?> selected <? } ?>>FAV Local e DDD</option>
 
-<option value="FAV Local e DDD com Móvel">FAV Local e DDD com Móvel</option>
+<option value="FAV Local e DDD com Móvel" <? if($_GET['t'] == 'FAV Local e DDD com Móvel') { ?> selected <? } ?>>FAV Local e DDD com Móvel</option>
 
 <option value=""></option>
 
-<option value="FAV Local + TV">FAV Local + TV</option>
+<option value="FAV Local + TV" <? if($_GET['t'] == 'FAV Local + TV') { ?> selected <? } ?>>FAV Local + TV</option>
 
-<option value="FAV Local com DDD + TV">FAV Local com DDD + TV</option>
+<option value="FAV Local com DDD + TV" <? if($_GET['t'] == 'FAV Local com DDD + TV') { ?> selected <? } ?>>FAV Local com DDD + TV</option>
 
-<option value="FAV Local e DDD + TV">FAV Local e DDD + TV</option>
+<option value="FAV Local e DDD + TV" <? if($_GET['t'] == 'FAV Local e DDD + TV') { ?> selected <? } ?>>FAV Local e DDD + TV</option>
 
-<option value="FAV Local e DDD com Móvel + TV">FAV Local e DDD com Móvel + TV</option>
+<option value="FAV Local e DDD com Móvel + TV" <? if($_GET['t'] == 'FAV Local e DDD com Móvel + TV') { ?> selected <? } ?>>FAV Local e DDD com Móvel + TV</option>
 
 </select>
 
@@ -677,9 +677,9 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 	
 ?>
 
-<option value="BOLETO">BOLETO</option>
+<option value="BOLETO" <? if($_GET['f'] == 'BOLETO'){?>selected="selected"<? }?>>BOLETO</option>
 
-<option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option>
+<option value="CARTÃO DE CRÉDITO" <? if($_GET['f'] == 'CARTÃO DE CRÉDITO'){?>selected="selected"<? }?>>CARTÃO DE CRÉDITO</option>
 
 <!-- 
 <option value="DEPÓSITO">DEPÓSITO</option>
@@ -696,7 +696,7 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 
 ?>
 
-<option value="DINHEIRO">DINHEIRO</option>
+<option value="DINHEIRO" <? if($_GET['f'] == 'DINHEIRO'){?>selected="selected"<? }?>>DINHEIRO</option>
 
 
 </select>
@@ -713,7 +713,7 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 
 <option value=""></option>
 <?php 
-/*
+
 	$venda = new Venda();
 	$venda->Status->produtoId = 3;
 	
@@ -724,8 +724,8 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 	?>
 		<option value="<?php echo $key; ?>" <? if($_GET['s'] == "$key"){?>selected="selected"<? }?>><?php echo $status; ?></option>
    <?php 
-	
-	*/
+}
+
 ?>
 
 </select>
@@ -1441,6 +1441,8 @@ if ($class=="tr2"){ //alterna a cor
 <? if($VENDA['ultimo_envio_documentos'])
    echo date("d/m/Y", strtotime($VENDA['ultimo_envio_documentos'])); ?>
 
+</td>
+
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(pagamento)')){?>
@@ -1664,7 +1666,7 @@ if($numpag == $pg){ ?>
 
 	
 
-<td width="15px" align="center" bgcolor="#0096ff" style="cursor:pointer; color:#FFF; font-size:13px; font-weight:bold" onClick="window.location = ('?p=<?= $_GET['p']; ?>&m=<?= $_GET['m'];?>&o=<?= $_GET['o']; ?>&t=<?= $_GET['t']; ?>&f=<?= $_GET['f']; ?>&s=<?= $_GET['s']; ?>&v=<?= $_GET['v']; ?>&i=<?= $_GET['i']; ?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo $numpag; ?>&di=<?= $_GET['di']; ?>&di2=<?= $_GET['di2']; ?>&tpentrega=<?= $_GET['tpentrega']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&g=<?= $_GET['g']; ?>')"><? echo $numpag; ?></td>	
+<td width="15px" align="center" bgcolor="#0096ff" style="cursor:pointer; color:#FFF; font-size:13px; font-weight:bold" onClick="window.location = ('?p=<?= $_GET['p']; ?>&m=<?= $_GET['m'];?>&o=<?= $_GET['o']; ?>&t=<?= $_GET['t']; ?>&f=<?= $_GET['f']; ?>&s=<?= $_GET['s']; ?>&v=<?= $_GET['v']; ?>&i=<?= $_GET['i']; ?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo $numpag; ?>&di=<?= $_GET['di']; ?>&di2=<?= $_GET['di2']; ?>&tpentrega=<?= $_GET['tpentrega']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&g=<?= $_GET['g']; ?>')"><? echo $numpag; ?></td>
 
     
 
