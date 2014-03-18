@@ -2449,7 +2449,7 @@ foreach($aparelhos as $key=>$value)
 
 ?>
 
-if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_controle"]; ?>'; }
+if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_pos"]; ?>'; }
 <?php
 
 	}else{
@@ -2457,7 +2457,7 @@ if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valorap
 ?>
 
 
-else if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_controle"]; ?>'; }
+else if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_pos"]; ?>'; }
 
 <?php 
 
@@ -2468,6 +2468,8 @@ else if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('va
 
 else{ document.getElementById('valoraparelho').value = ''; }
 	}
+
+
 
 ////////////// PLANO PÓS ////////////////
 
