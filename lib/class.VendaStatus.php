@@ -243,6 +243,19 @@ class VendaStatus extends VentoAdmin{
 													)
 									),
 
+									'DOCUMENTOS ANEXADOS' => array (
+													
+													'tipouser' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('MONITORBO')
+																		),
+																'flux' => array('ENVIAR DOCUMENTOS')
+
+													)
+									),
+
 									'DOCUMENTOS ENVIADOS' => array (
 													
 													'tipouser' => array(

@@ -713,7 +713,7 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 
 <option value=""></option>
 <?php 
-/*
+
 	$venda = new Venda();
 	$venda->Status->produtoId = 3;
 	
@@ -725,7 +725,7 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 		<option value="<?php echo $key; ?>" <? if($_GET['s'] == "$key"){?>selected="selected"<? }?>><?php echo $status; ?></option>
    <?php 
 	
-	*/
+	}
 ?>
 
 </select>

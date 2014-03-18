@@ -320,7 +320,7 @@
 
 					<?
 
-					$sql = "SELECT id, nome FROM usuarios WHERE tipo_usuario='MONITOR' && (acesso_usuario='INTERNO' || acesso_usuario='EXTERNO') && status='ATIVO' order by nome";
+					$sql = "SELECT id, nome FROM usuarios WHERE tipo_usuario='MONITOR' || tipo_usuario='MONITORBO' && (acesso_usuario='INTERNO' || acesso_usuario='EXTERNO') && status='ATIVO' order by nome";
 					$parceiros = mysql_query($sql); 
 
 					while ($array= mysql_fetch_array($parceiros)) 

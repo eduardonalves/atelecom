@@ -366,7 +366,7 @@ class controleEstoque {
 	{
 		if ($dataFinal == "")
 		{
-			$dataFinal = date("Y-m-d H:i:s");
+			$dataFinal = date("Y-m-d H:i:s",  strtotime("+1 days"));
 		}
 		
 		$query = "Select saidas.id_parceiro, saidas.data, saidas.id_saida, 
