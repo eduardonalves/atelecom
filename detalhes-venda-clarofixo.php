@@ -2472,8 +2472,7 @@ else{ document.getElementById('valoraparelho').value = ''; }
 ////////////// PLANO PÓS ////////////////
 
 
-
-else if(plano == 'FAV Local com DDD' || plano == 'FAV Local e DDD' || plano == 'FAV Local e DDD com Móvel'){ 
+else if(plano == 'FAV Local com DDD' || plano == 'FAV Local e DDD' || plano == 'FAV Local e DDD com Móvel' || plano == 'FAV Local + TV' || plano == 'FAV Local com DDD + TV' || plano == 'FAV Local e DDD + TV' || plano == 'FAV Local e DDD com Móvel + TV'){ 
 
 <?php
 
