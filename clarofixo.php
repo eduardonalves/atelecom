@@ -427,7 +427,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <td width="50%"><input type="checkbox" name="chk13" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_finalizada)')){?>checked="checked"<? } ?> value="data_finalizada" /> Data Finalizada</td>
 
-<td width="50%"><input type="checkbox" name="chk14" <? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>checked="checked"<? } ?> value="ultimo_envio_documentos" /> Data Env. Doc.</td>
+<td width="50%"><input type="checkbox" name="chk14" <? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_doc)')){?>checked="checked"<? } ?> value="ultimo_envio_doc" /> Data Env. Doc.</td>
 
 </tr>
 
@@ -1124,7 +1124,7 @@ include "includes/filtro-clarofixo.php";
 <? } ?>
 
 
-<? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>
+<? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_doc)')){?>
 
 <td title="Data Env. Doc." onclick="window.location = '?p=clarofixo&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&di2=<?= $_GET['di2']; ?>&tpentrega=<?= $_GET['tpentrega']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'ultimo_envio_documentos ASC' || $_GET['o'] == ''){ echo 'ultimo_envio_documentos ASC'; } else { echo 'ultimo_envio_documentos DESC'; }?>'">Data Env. Doc. <? if($_GET['o'] == 'ultimo_envio_documentos DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'ultimo_envio_documentos ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 
@@ -1275,7 +1275,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(os)')){?>
 
-<td title="N&uacute;mero da OS" <? if(strstr($_GET['o'],'os')){ ?> class="tdselected" <? } ?>><?= $VENDA['os'];?></td>
+<td title="Número da OS" <? if($_GET['o'] == 'os ASC' || $_GET['o'] == 'os DESC'){ ?> class="tdselected" <? } ?>><?= $VENDA['os'];?></td>
 
 <? } ?>
 
@@ -1283,7 +1283,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(esn)')){?>
 
-<td title="Código ESN" <? if(strstr($_GET['o'],'esn')){ ?>class="tdselected" <? } ?>><?= $VENDA['esn'];?></td>
+<td title="Código ESN" <? if($_GET['o'] == 'esn ASC' || $_GET['o'] == 'esn DESC'){ ?>class="tdselected" <? } ?>><?= $VENDA['esn'];?></td>
 
 <? } ?>
 
@@ -1291,7 +1291,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(tipoAssinatura)')){?>
 
-<td title="Tipo de Assinatura" <? if(strstr($_GET['o'],'tipoAssinatura')){ ?>class="tdselected" <? } ?>><?= $VENDA['tipoAssinatura'];?></td>
+<td title="Tipo de Assinatura" <? if($_GET['o'] == 'tipoAssinatura ASC' || $_GET['o'] == 'tipoAssinatura DESC'){ ?>class="tdselected" <? } ?>><?= $VENDA['tipoAssinatura'];?></td>
 
 <? } ?>
 
@@ -1299,7 +1299,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(monitor)')){?>
 
-<td title="Nome do Monitor" <? if(strstr($_GET['o'],'monitor')){ ?>class="tdselected" <? } ?>><?= $MONITOR['nome'];?></td>
+<td title="Nome do Monitor" <? if($_GET['o'] == 'monitor ASC' || $_GET['o'] == 'monitor DESC'){ ?>class="tdselected" <? } ?>><?= $MONITOR['nome'];?></td>
 
 <? } ?>
 
@@ -1307,7 +1307,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(operador)')){?>
 
-<td title="Nome do Operador" <? if(strstr($_GET['o'],'operador')){ ?>class="tdselected" <? } ?>><?= $OPERADOR['nome'];?></td>
+<td title="Nome do Operador" <? if($_GET['o'] == 'operador ASC' || $_GET['o'] == 'operador DESC'){ ?>class="tdselected" <? } ?>><?= $OPERADOR['nome'];?></td>
 
 <? } ?>
 
@@ -1315,7 +1315,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(nome)')){?>
 
-<td title="Nome do Cliente" <? if(strstr($_GET['o'],'nome')){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['nome']));?></td>
+<td title="Nome do Cliente" <? if($_GET['o'] == 'nome ASC' || $_GET['o'] == 'nome DESC'){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['nome']));?></td>
 
 <? } ?> 
 
@@ -1323,7 +1323,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(cpf)')){?>
 
-<td title="CPF/CNPJ do Cliente" <? if(strstr($_GET['o'],'cpf')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['cpf']);?></td>
+<td title="CPF/CNPJ do Cliente" <? if($_GET['o'] == 'cpf ASC' || $_GET['o'] == 'cpf DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['cpf']);?></td>
 
 <? } ?>
 
@@ -1331,21 +1331,21 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(telefone)')){?>
 
-<td title="Telefone do Cliente" <? if(strstr($_GET['o'],'telefone')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['telefone']);?></td>
+<td title="Telefone do Cliente" <? if($_GET['o'] == 'telefone ASC' || $_GET['o'] == 'telefone DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['telefone']);?></td>
 
 <? } ?>
 
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(novo_numero)')){?>
 
-<td title="Novo Número de Telefone do Cliente" <? if(strstr($_GET['o'],'novoNumero')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['novoNumero']);?></td>
+<td title="Novo Número de Telefone do Cliente" <? if($_GET['o'] == 'novoNumero ASC' || $_GET['o'] == 'novoNumero DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['novoNumero']);?></td>
 
 <? } ?>
 
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(cidade)')){?>
 
-<td title="Cidade do Cliente" <? if(strstr($_GET['o'],'cidade')){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['cidade']));?></td>
+<td title="Cidade do Cliente" <? if($_GET['o'] == 'cidade ASC' || $_GET['o'] == 'cidade DESC'){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['cidade']));?></td>
 
 <? } ?>
 
@@ -1353,7 +1353,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(cep)')){?>
 
-<td title="CEP" <? if(strstr($_GET['o'],'cep')){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['cep']));?></td>
+<td title="CEP" <? if($_GET['o'] == 'cep ASC' || $_GET['o'] == 'cep DESC'){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['cep']));?></td>
 
 <? } ?>
 
@@ -1361,7 +1361,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(plano)')){?>
 
-<td title="Plano" <? if(strstr($_GET['o'],'plano')){ ?>class="tdselected" <? } ?>><?= $VENDA['plano'];?></td>
+<td title="Plano" <? if($_GET['o'] == 'plano ASC' || $_GET['o'] == 'plano DESC'){ ?>class="tdselected" <? } ?>><?= $VENDA['plano'];?></td>
 
 <? } ?>
 
@@ -1369,7 +1369,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(aparelho)')){?>
 
-<td title="Aparelho" <? if(strstr($_GET['o'],'aparelho')){ ?>class="tdselected" <? } ?>>
+<td title="Aparelho" <? if($_GET['o'] == 'aparelho ASC' || $_GET['o'] == 'aparelho DESC'){ ?>class="tdselected" <? } ?>>
 
 <?php
 
@@ -1398,7 +1398,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(vencimento)')){?>
 
-<td title="Dia de Vencimento das Faturas" <? if(strstr($_GET['o'],'vencimento')){ ?>class="tdselected" <? } ?>><?= $VENDA['vencimento'];?></td>
+<td title="Dia de Vencimento das Faturas" <? if($_GET['o'] == 'vencimento ASC' || $_GET['o'] == 'vencimento DESC'){ ?>class="tdselected" <? } ?>><?= $VENDA['vencimento'];?></td>
 
 <? } ?>
 
@@ -1408,7 +1408,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(data)')){?>
 
-<td title="Data da Venda" <? if(strstr($_GET['o'],'data ') || $_GET['o'] == ''){ ?>class="tdselected"  <? } ?>><?= substr($VENDA['data'],6,2)."/".substr($VENDA['data'],4,2)."/".substr($VENDA['data'],0,4);?></td>
+<td title="Data da Venda" <? if($_GET['o'] == 'data ASC' || $_GET['o'] == 'data DESC' || $_GET['o'] == ''){ ?>class="tdselected"  <? } ?>><?= substr($VENDA['data'],6,2)."/".substr($VENDA['data'],4,2)."/".substr($VENDA['data'],0,4);?></td>
 
 <? } ?>
 
@@ -1416,7 +1416,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(data_entrega)')){?>
 
-<td title="Data Entrega" <? if(strstr($_GET['o'],'data_marcada')){ ?>class="tdselected" <? } ?>>
+<td title="Data Entrega" <? if($_GET['o'] == 'data_marcada ASC' || $_GET['o'] == 'data_marcada DESC'){ ?>class="tdselected" <? } ?>>
 
 <?= substr($VENDA['data_marcada'],6,2)."/".substr($VENDA['data_marcada'],4,2)."/".substr($VENDA['data_marcada'],0,4);?>
 
@@ -1428,7 +1428,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(data_finalizada)')){?>
 
-<td title="Data Finalizada" <? if(strstr($_GET['o'],'data_instalacao')){ ?>class="tdselected" <? } ?>>
+<td title="Data Finalizada" <? if($_GET['o'] == 'data_instalacao ASC' || $_GET['o'] == 'data_instalacao DESC'){ ?>class="tdselected" <? } ?>>
 
 <?= substr($VENDA['data_instalacao'],6,2)."/".substr($VENDA['data_instalacao'],4,2)."/".substr($VENDA['data_instalacao'],0,4);?>
 
@@ -1436,12 +1436,12 @@ if ($class=="tr2"){ //alterna a cor
 
 <? } ?>
 
-<? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_documentos)')){?>
+<? if(strstr($USUARIO['colunas_clarofixo'],'(ultimo_envio_doc)')){?>
 
-<td title="Data Env. Doc." <? if(strstr($_GET['o'],'ultimo_envio_documentos')){ ?>class="tdselected" <? } ?>>
+<td title="Data Env. Doc." <? if($_GET['o'] == 'ultimo_envio_documentos ASC' || $_GET['o'] == 'ultimo_envio_documentos DESC'){ ?>class="tdselected" <? } ?>>
 
-<? if($VENDA['ultimo_envio_documentos'])
-   echo date("d/m/Y", strtotime($VENDA['ultimo_envio_documentos'])); ?>
+<? if($VENDA['ultimo_envio_doc'])
+   echo date("d/m/Y", strtotime($VENDA['ultimo_envio_doc'])); ?>
 
 </td>
 
@@ -1449,7 +1449,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(pagamento)')){?>
 
-<td title="Forma de Pagamento" <? if(strstr($_GET['o'],'pagamento')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['pagamento']);?></td>
+<td title="Forma de Pagamento" <? if($_GET['o'] == 'pagamento ASC' || $_GET['o'] == 'pagamento DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['pagamento']);?></td>
 
 <? } ?>
 
@@ -1457,7 +1457,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_restricao)')){?>
 
-<td title="Motivo Restrição" <? if(strstr($_GET['o'],'motivo_restricao')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_restricao']);?></td>
+<td title="Motivo Restrição" <? if($_GET['o'] == 'motivo_restricao ASC' || $_GET['o'] == 'motivo_restricao DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_restricao']);?></td>
 
 <? } ?>
 
@@ -1465,21 +1465,21 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_cancelamento)')){?>
 
-<td title="Motivo Cancelamento" <? if(strstr($_GET['o'],'motivo_cancelamento')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_cancelamento']);?></td>
+<td title="Motivo Cancelamento" <? if($_GET['o'] == 'motivo_cancelamento ASC' || $_GET['o'] == 'motivo_cancelamento DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_cancelamento']);?></td>
 
 <? } ?>
 
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_devolvido)')){?>
 
-<td title="Motivo Devolvido" <? if(strstr($_GET['o'],'motivo_devolvido')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_devolvido']);?></td>
+<td title="Motivo Devolvido" <? if($_GET['o'] == 'motivo_devolvido ASC' || $_GET['o'] == 'motivo_devolvido DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_devolvido']);?></td>
 
 <? } ?>
 
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(pendencia)')){?>
 
-<td title="Pendencia" <? if(strstr($_GET['o'],'pendencia')){ ?>class="tdselected" <? } ?>><?= $VENDA['pendencia'];?></td>
+<td title="Pendencia" <? if($_GET['o'] == 'pendencia ASC' || $_GET['o'] == 'pendencia DESC'){ ?>class="tdselected" <? } ?>><?= $VENDA['pendencia'];?></td>
 
 <? } ?>
 
@@ -1487,7 +1487,7 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(data_liberacao)')){?>
 
-<td title="Data Liberação" <? if(strstr($_GET['o'],'dataLiberacao')){ ?>class="tdselected" <? } ?>>
+<td title="Data Liberação" <? if($_GET['o'] == 'dataLiberacao ASC' || $_GET['o'] == 'dataLiberacao DESC'){ ?>class="tdselected" <? } ?>>
 
 <?= substr($VENDA['dataLiberacao'],6,2)."/".substr($VENDA['dataLiberacao'],4,2)."/".substr($VENDA['dataLiberacao'],0,4);?>
 
@@ -1498,25 +1498,25 @@ if ($class=="tr2"){ //alterna a cor
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(tipo_venda)')){?>
 
-<td title="Tipo Venda" <? if(strstr($_GET['o'],'tipoVenda')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['tipoVenda']);?></td>
+<td title="Tipo Venda" <? if($_GET['o'] == 'tipoVenda ASC' || $_GET['o'] == 'tipoVenda DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['tipoVenda']);?></td>
 
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_gravacao)')){?>
 
-<td title="Agendamento Gravação" <? if(strstr($_GET['o'],'agendGravacao')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['agendGravacao']);?></td>
+<td title="Agendamento Gravação" <? if($_GET['o'] == 'agendGravacao ASC' || $_GET['o'] == 'agendGravacao DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['agendGravacao']);?></td>
 
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_entrega)')){?>
 
-<td title="Agendamento Entrega" <? if(strstr($_GET['o'],'agendEntrega')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['agendEntrega']);?></td>
+<td title="Agendamento Entrega" <? if($_GET['o'] == 'agendEntrega ASC' || $_GET['o'] == 'agendEntrega DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['agendEntrega']);?></td>
 
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(status)')){?>
 
-<td title="Status" <? if(strstr($_GET['o'],'status')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['status']);?></td>
+<td title="Status" <? if($_GET['o'] == 'status ASC' || $_GET['o'] == 'status DESC'){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['status']);?></td>
 
 <? } ?>
 
@@ -1530,13 +1530,13 @@ $saidaTexto = new Accents( Accents::UTF_8, Accents::ISO_8859_1 );
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(status_portal)')){?>
 
-<td title="Status Portal" <? if(strstr($_GET['o'],'status_portal')){ ?>class="tdselected" <? } ?>><? echo $saidaTexto->clear( $planilhas->getTiposPlanilhas($VENDA["status_qualidade"]));?></td>
+<td title="Status Portal" <? if($_GET['o'] == 'status_portal ASC' || $_GET['o'] == 'status_portal DESC'){ ?>class="tdselected" <? } ?>><? echo $saidaTexto->clear( $planilhas->getTiposPlanilhas($VENDA["status_qualidade"]));?></td>
 
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(documentacao)')){?>
 
-<td title="Documenta&ccedil;&atilde;o" <? if(strstr($_GET['o'],'documentacao')){ ?>class="tdselected" <? } ?>><? echo $saidaTexto->clear( $planilhas->getTiposProcessos($VENDA["status_processo"]));?></td>
+<td title="Documenta&ccedil;&atilde;o" <? if($_GET['o'] == 'documentacao ASC' || $_GET['o'] == 'documentacao DESC'){ ?>class="tdselected" <? } ?>><? echo $saidaTexto->clear( $planilhas->getTiposProcessos($VENDA["status_processo"]));?></td>
 
 <? } ?>
 
