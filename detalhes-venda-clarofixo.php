@@ -202,7 +202,7 @@ $tipoLinha = $_POST['tipolinha'];
 $tipoAssinatura = $_POST['tipoassinatura'];
 $tipoPlano = $_POST['tipoplano'];
 $plano = $_POST['plano'];
-$Plano = $_POST['valorplano'];
+$valorPlano = $_POST['valorplano'];
 $aparelho = $_POST['aparelho'];
 $valorAparelho = $_POST['valoraparelho'];
 $pagamento = $_POST['pagamento'];
@@ -598,13 +598,13 @@ if($_POST['status'] == strtoupper('FINALIZADA') && ($_POST['agendaentrega'] == "
 	
 		if($_POST['tipoEntrega']=='EMBRATEL')
 		{
-			$excep = array("lote", "quadra", "complemento", "os", "esn", "novonumero", "rg", "itelefone2", "tipotel2", "itelefone3", "tipotel3", "email");
+			$excep = array("lote", "quadra", "complemento", "os", "esn", "novonumero","rg","orgexp","dataexp", "itelefone3","tipotel3","valoraparelho","itelefone2","tipotel2","email","profissao");
 			validarCampos($campos, $excep);
 			
 
 		}elseif ($_POST['tipoEntrega']=='PRONTA ENTREGA') {
 			
-			$excep = array("lote", "quadra", "complemento", "rg", "itelefone2", "tipotel2", "itelefone3", "tipotel3", "email");
+			$excep = array("lote", "quadra", "complemento","rg","orgexp","dataexp", "itelefone3","tipotel3","valoraparelho","itelefone2","tipotel2","email","profissao");
 			validarCampos($campos, $excep);
 			
 			
@@ -808,7 +808,9 @@ window.location = '?e=1&id=<?= $_GET['id'];?>'
 <script type="text/javascript">
 	
 	$(window).load(function(){
-
+		
+		verificaplanos( $("#plano").val() );
+		
 		checkAgendEntrega();
 		
 		$("#pagamento").change(
@@ -2276,15 +2278,18 @@ else { document.getElementById('valorplano').value = '';}
 
 $optAparelhos = "<option value=\"\"></option>";
 
-if ($linha['status'] == "APROVADO" || $linha['status'] == "DOCUMENTOS ANEXADOS" || $linha['status']=="ENVIAR DOCUMENTOS")
+if ($linha['status'] == "APROVADO" || $linha['status'] == "DOCUMENTOS ANEXADOS" || $linha['status']=="ENVIAR DOCUMENTOS" || 1==1)
 {
 	
 	$modelosAparelhos = $estoque->getModelosAparelhosEstoque($linha["monitor"]);
 
 	foreach($modelosAparelhos as $id=>$aparelho)
 	{
+		$sel = "";
 
-		$optAparelhos .= "<option id=\"" . $linha["monitor"] . "\" value=\"". $id . "\">". $aparelho ."\"</option>";
+		if ($id==$linha['aparelho']) { $sel = "selected=\"selected\""; $achouAparelho = true; }
+
+		$optAparelhos .= "<option id=\"" . $linha["monitor"] . "\" value=\"". $id . "\" " . $sel .">". $aparelho ."\"</option>";
 	}
 }
 
@@ -7744,7 +7749,7 @@ $linha['status'] != 'PRE-ANALISE' && $linha['status'] != 'RESTRIÇÃO' && $linha
 
 
 
-$conMONITORES = $conexao->query("SELECT * FROM usuarios WHERE grupo LIKE '%0003%' && tipo_usuario = 'MONITOR' ORDER BY nome ASC");
+$conMONITORES = $conexao->query("SELECT * FROM usuarios WHERE grupo LIKE '%0003%' && (tipo_usuario = 'MONITOR' || tipo_usuario = 'MONITORBO') ORDER BY nome ASC");
 
 
 

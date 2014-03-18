@@ -724,7 +724,9 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 	?>
 		<option value="<?php echo $key; ?>" <? if($_GET['s'] == "$key"){?>selected="selected"<? }?>><?php echo $status; ?></option>
    <?php 
-}
+
+	
+	}
 
 ?>
 
