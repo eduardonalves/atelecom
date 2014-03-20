@@ -7,7 +7,7 @@
 <script type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
 
-<!--Javascript/Jquery - COMEÃO-->
+<!--Javascript/Jquery - COMEÇO-->
 
 
 
@@ -197,13 +197,22 @@
                 $(".desabilitar").attr("disabled", true);
                
               });           
-                    
+
+function somenteNumero(e){
+	var tecla=(window.event)?event.keyCode:e.which;
+	if((tecla>47 && tecla<58)) return true;
+	else{
+	if (tecla==8 || tecla==0) return true;
+	else return false;
+}
+}
+
 </script>
 <!--Javascript/Jquery - FIM-->
 
 
 
-<!-- Layout - COMEÃO --> 
+<!-- Layout - COMEÇO --> 
 
 
 
@@ -228,13 +237,13 @@
 
 
 
-<!-- FormulÃ¡rio COMEÃO -->
+<!-- Formulário COMEÇO -->
 <center>
 <form id="inserir" name="inserir" action="" method="post">
 <table id="tableAppend" border="0" width="850px" >
 
 <tr align="left">
-<td style="color:#069; font-size:12px; width:158px;">Entradas</td>
+<td style="color:#069; font-size:12px; width:158px;">Entrada</td>
 </tr>
 
 <tr align="left">
@@ -289,7 +298,7 @@ echo"<option value=".$USUARIO['id'].">".$USUARIO['nome']."</option>";
 
 
 <tr align="left">
-<td width="100px" style="color:#069; font-size:12px">Itens de Entradas</td>
+<td width="100px" style="color:#069; font-size:12px">Itens de Entrada</td>
 </tr>
 
 
@@ -319,7 +328,7 @@ echo"<option value=".$USUARIO['id'].">".$USUARIO['nome']."</option>";
 
 <tr align='left'>
 <td>Quantidade:</td>
-<td><input style="width:40px;" type='text' id='textBoxQuantidade1' class='desabilitar' name='textBoxQuantidade1'/> <a class="edit_quantidade" id='teste1' href="#"><img src='img/icone-editar.png'/></a></td>
+<td><input style="width:40px;" type='text' id='textBoxQuantidade1' class='desabilitar' name='textBoxQuantidade1' onkeypress="return somenteNumero(event)" /> <a class="edit_quantidade" id='teste1' href="#"><img src='img/icone-editar.png'/></a></td>
 </tr>
     
 <!--<tr align='left'>

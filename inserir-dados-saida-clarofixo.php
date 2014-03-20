@@ -234,8 +234,16 @@
                
               }); 
               
- 
-    
+
+function somenteNumero(e){
+	var tecla=(window.event)?event.keyCode:e.which;
+	if((tecla>47 && tecla<58)) return true;
+	else{
+	if (tecla==8 || tecla==0) return true;
+	else return false;
+}
+}
+
 </script>
 <!--Javascript/Jquery - FIM-->
 
@@ -368,7 +376,7 @@
 
 			<tr align='left'>
 				<td>Quantidade:</td>
-				<td><input type='text' style="width:40px;" id='textBoxQuantidade1' class='desabilitar' name='textBoxQuantidade1'/> <a class="edit_quantidade" id='teste1' href="#"><img src='img/icone-editar.png'/></a></td>
+				<td><input type='text' style="width:40px;" id='textBoxQuantidade1' class='desabilitar' name='textBoxQuantidade1' onkeypress="return somenteNumero(event)"/> <a class="edit_quantidade" id='teste1' href="#"><img src='img/icone-editar.png'/></a></td>
 			</tr>
     
 			<tr align='left'>
