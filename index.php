@@ -52,13 +52,11 @@ window.location = 'adm'
 
 if(isset($_POST['login'])){
 
-	
+if(!$_POST['resetarsenha']){
 
 $login = $_POST['login'];
 
 $senha =  md5($_POST['senha']);
-
-
 
 
 
@@ -70,13 +68,10 @@ $linha = mysql_fetch_array($consulta);
 
 if($linha == 0){ $erro = "1";} else{
 
-	
-
-
 
 $_SESSION['usuario'] = $linha['id'];
 
-// Criaa logon akkiii
+// Cria logon aqui
 
 
 $genLogon = new Logon($conexao);
@@ -91,9 +86,7 @@ $data = date("Y-m-d H:i:s");
 //LOG ENTRADA
 
 
-
 $insert_entrada = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$data."','".$linha['id']."','Entrou no sistema.')");
-
 
 
 ?>
@@ -112,9 +105,60 @@ window.location = 'adm?a=1';
 
 }
 
+}
 
-
+else{
 	
+	$email = $_POST['email'];
+	
+	//echo $email;
+	
+	//Verificar se o endereço está cadastrado no sistema.
+	
+	$consulta = $conexao->query("SELECT * from usuarios where email = '".$email."'");
+	
+	$linha = mysql_fetch_array($consulta);
+	
+	if($linha == 0){
+		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />ERRO: e-mail não cadastrado no sistema.");}
+	else{
+		require_once("lib/PHPMailer-master/class.phpmailer.php");
+		$mail = new PHPMailer();
+
+		$mail->IsSMTP();  // telling the class to use SMTP
+		$mail->SMTPDebug = 2; // 2 to enable SMTP debug information 
+		$mail->SMTPAuth = TRUE; // enable SMTP authentication
+		$mail->SMTPSecure = "ssl"; //Secure conection
+		$mail->Port = 465; // set the SMTP port
+		$mail->Username = "email@gmail.com"; // SMTP account username
+		$mail->Password = "senha"; // SMTP account password
+		$mail->Host     = "smtp.gmail.com"; // SMTP server
+		$mail->CharSet  = "UTF-8";
+		
+		$mail->From     = "email@gmail.com";
+		$mail->FromName = "Vento Admin";
+		$mail->AddAddress($email, "Usuário(a)");
+
+		$mail->Subject  = "Vento Admin - Redefinição de Senha";
+		$mail->Body     = "Olá Usuário(a)! \n\nAcesse o link a seguir para completar o processo de redefinição de sua senha no Vento Admin. \n\nLink: \n\nSe você não solicitou redefinição de senha no Vento Admin, por favor desconsidere este e-mail.";
+		$mail->WordWrap = 50;
+
+		if($mail->Send())
+			echo "E-mail enviado com sucesso";
+		else
+			echo "Erro ao enviar e-mail, tente novamente mais tarde.";
+		
+		$mail->SmtpClose();
+}
+	
+	
+	//Caso esteja, enviar e-mail com link para resetar senha.
+	
+	//Se não estiver cadastrado, informar na tela e recarregar página.
+	
+	
+	}
+
 
 }
 
@@ -154,7 +198,37 @@ $(document).ready(function(e) {
 
 });
 
+function esquecisenha(str){
+	
+	if(str=='esqueci'){
+		$(".camposlogin").css('display','none');
+		$("#login").val('');
+		$("#senha").val('');
+		$(".campossenha").css('display','');
+		$("#resetarsenha").val(true);
+	}
+	else if(str=='voltar'){
+		$(".campossenha").css('display','none');
+		$("#email").val('');
+		$(".camposlogin").css('display','');
+		$("#resetarsenha").val(false);
+		}
+	
+	}
+	
+function validaEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 
+function enviarEmail(email){
+	
+	if(validaEmail(email))
+		document.forms['logar'].submit();
+	else
+		alert('Endereço de e-mail Inválido!');
+	
+	}
 
 </script>
 
@@ -214,33 +288,59 @@ left:0%; top:50%; opacity:0;
 
 <form name="logar" action="" method="post">
 
+<input type="hidden" name="resetarsenha" id="resetarsenha">
 
-
-<tr>
+<tr class="camposlogin">
 
 <td>Login:</td>
 
-<td><input type="text" name="login" size="25" /></td>
+<td><input type="text" name="login" id="login" size="25" /></td>
 
 </tr>
 
 
 
-<tr>
+<tr class="camposlogin">
 
 <td>Senha:</td>
 
-<td><input type="password" name="senha" size="25" /></td>
+<td><input type="password" name="senha" id="senha" size="25" /></td>
 
 </tr>
 
+<tr class="campossenha" style="display: none;">
 
+<td>E-mail:</td>
 
-<tr>
+<td><input type="text" name="email" id="email" size="25" /></td>
+
+</tr>
+
+<tr class="campossenha" style="display: none;">
 
 <td></td>
 
-<td><input type="submit" name="entrar" value="Entrar" /> <? if($erro == '1'){?><span style="color:#006; font-size:12px; font-weight:bold">Login ou Senha inválido!</span><? } ?></td>
+<td style="color:#006; font-size:12px; font-weight:bold">Entre com seu endereço de e-mail. <br />Encaminharemos um link para resetar sua senha.</td>
+
+</tr>
+
+<tr class="camposlogin">
+
+<td></td>
+
+<td><input type="submit" name="entrar" value="Entrar" /> <? if($erro == '1'){?><span style="color:#006; font-size:12px; font-weight:bold">Login ou Senha inválido!</span><? } ?>
+<a href="#" onclick="esquecisenha('esqueci')" style="font-size: 70%; float: right;"> Esqueci minha senha</a>
+</td>
+
+</tr>
+
+<tr class="campossenha" style="display: none;">
+
+<td></td>
+
+<td><input type="button" name="enviar" value="Enviar" onclick="enviarEmail(document.getElementById('email').value)"/> <? if($errosenha == '1'){?><span style="color:#006; font-size:12px; font-weight:bold">E-mail inválido!</span><? } ?>
+<a href="#" onclick="esquecisenha('voltar')" style="font-size: 70%; float: right;"> Voltar</a>
+</td>
 
 </tr>
 
