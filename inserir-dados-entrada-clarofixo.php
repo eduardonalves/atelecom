@@ -253,7 +253,7 @@ function somenteNumero(e){
 <input type="hidden" value="<? echo date("d/m/Y");?>" name="textBoxDataEntrada" id="textBoxDataEntrada" />
 <span><? echo date("d/m/Y");?></span>
 <span class="campoobrigatorio" title="Campo Obrigat&oacute;rio">*</span>
-<span class="erro" id="epessoa" style="display:none">Por favor, selecione o tipo do cliente!</span><img src="img/x.png" onclick=""/>
+<span class="erro" id="epessoa" style="display:none">Por favor, selecione o tipo do cliente!</span>
 </td>
 </tr>
 

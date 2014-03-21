@@ -1,6 +1,6 @@
 <?php
 
-    //ConexÃ£o com Banco
+    //Conexão com Banco
     include_once("conexao.php");
     
     $origem = $_POST['selectOrigem'];
@@ -12,7 +12,7 @@
 		
 		require "includes/inserir-entrada-claro.php";
 		
-	}elseif (strstr($origem, "parceiro")) {
+	}else if (strstr($origem, "parceiro")) {
 		
 		require "includes/inserir-entrada-parceiro.php";
 		

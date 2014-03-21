@@ -1,6 +1,4 @@
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.js"></script>
 <script src="js/jquery.Jcrop.min.js"></script>
 <script src="js/jquery.Jcrop.js"></script>
 <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
@@ -223,7 +221,7 @@ window.location = '?p=configuracoes';
 $es1 = 'Dados de Usuário';
 $es2 = 'Definir Metas';
 $es3 = 'Lista Operadores';
-$es4 = 'Status Portal';
+//$es4 = 'Status Portal';
 $es5 = 'Lista Usuários';
 
 ?>
@@ -291,11 +289,11 @@ input[type="submit"]:active{ background:#ededed;}
 <? } ?>
 
 
-<? if($USUARIO['tipo_usuario'] == 'ADMINISTRADOR'){?>
+<? /* if($USUARIO['tipo_usuario'] == 'ADMINISTRADOR'){?>
 <tr  height="35px" style="cursor:pointer" onclick="window.location='?p=<?= $_GET['p'];?>&m=<?= $_GET['m'];?>&an=<?= $_GET['an'];?>&es=4'"  class="<? if($_GET['es'] == '4' || $_GET['es'] == '4-update'){ ?>menulateralselected<? } else { ?>menulateral<? } ?>">
 <td> &nbsp;  &nbsp; <?= $es4; ?></td>
 </tr>
-<? } ?>
+<? } */?>
 
 </table>
 
@@ -371,9 +369,11 @@ else if($_GET['es'] == '3'){ include "lista-operadores.php"; }
 
 else if($_GET['es'] == '5'){ include "lista-usuarios.php"; } 
 
-else if($_GET['es'] == '4'){ include "status-portal.php"; } 
-
-else if($_GET['es'] == '4-update'){ include "status-portal-update.php"; } 
+/*
+ * else if($_GET['es'] == '4'){ include "status-portal.php"; } 
+ * else if($_GET['es'] == '4-update'){ include "status-portal-update.php"; } 
+ * 
+ */
 
 ?>
 

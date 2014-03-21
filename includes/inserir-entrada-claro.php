@@ -1,17 +1,17 @@
 <?php
 
-   //Recupera valores do formulario
+    //Recupera valores do formulario
     $quantidadeAparelho=$_POST['qntdAparelho']; 
-   
+
     $sql2 = "";
-    
+
     $data = $_POST['textBoxDataEntrada'];
-           
+
     $arrayData = explode("/", $data);
     $TempArrayData[0] = $arrayData[2];
     $TempArrayData[1] = $arrayData[1];
     $TempArrayData[2] = $arrayData[0];
-           
+
     $data = implode("-", $TempArrayData);
     $data .= " " . date("H:i:s");
 
@@ -19,8 +19,8 @@
            
     $estoquista = $_POST['selectEstoquista'];
     $origem = $_POST['selectOrigem'];
-       
-                     
+
+
 	for ( $x = 1; $x <= $quantidadeAparelho ; $x++ ){  
 		$quantidade_itens = $_POST["textBoxQuantidade$x"];  
              
