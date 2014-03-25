@@ -86,6 +86,16 @@ class VendaStatus extends VentoAdmin{
 
 									'PRE-ANALISE' => array (
 													
+													'Administrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE','ANÁLISE','RESTRIÇÃO','APROVADO','INSTALAR','CONECTADO','CANCELADO','DEVOLVIDO','ESTORNADA','AGUARDANDO PAGAMENTO')
+
+													),
+
 													'tipouser' => array(
 																
 																'==' => array (
@@ -99,6 +109,16 @@ class VendaStatus extends VentoAdmin{
 
 									'ANÁLISE' => array (
 													
+													'Administrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE','ANÁLISE','RESTRIÇÃO','APROVADO','INSTALAR','CONECTADO','CANCELADO','DEVOLVIDO','ESTORNADA','AGUARDANDO PAGAMENTO')
+
+													),
+													
 													'tipouser' => array(
 																
 																'==' => array (
@@ -111,7 +131,17 @@ class VendaStatus extends VentoAdmin{
 									),
 								
 									'APROVADO' => array (
-													
+
+													'Administrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE','ANÁLISE','RESTRIÇÃO','APROVADO','INSTALAR','CONECTADO','CANCELADO','DEVOLVIDO','ESTORNADA','AGUARDANDO PAGAMENTO')
+
+													),
+																										
 													'tipouser' => array(
 																
 																'==' => array (
@@ -124,6 +154,16 @@ class VendaStatus extends VentoAdmin{
 									),
 
 									'INSTALAR' => array (
+													
+													'Administrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE','ANÁLISE','RESTRIÇÃO','APROVADO','INSTALAR','CONECTADO','CANCELADO','DEVOLVIDO','ESTORNADA','AGUARDANDO PAGAMENTO')
+
+													),
 													
 													'tipouser' => array(
 																
@@ -138,6 +178,16 @@ class VendaStatus extends VentoAdmin{
 
 									'CONECTADO' => array (
 													
+													'Administrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE','ANÁLISE','RESTRIÇÃO','APROVADO','INSTALAR','CONECTADO','CANCELADO','DEVOLVIDO','ESTORNADA','AGUARDANDO PAGAMENTO')
+
+													),
+													
 													'tipouser' => array(
 																
 																'==' => array (
@@ -150,6 +200,16 @@ class VendaStatus extends VentoAdmin{
 									),
 
 									'AGUARDANDO PAGAMENTO' => array (
+													
+													'Administrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE','ANÁLISE','RESTRIÇÃO','APROVADO','INSTALAR','CONECTADO','CANCELADO','DEVOLVIDO','ESTORNADA','AGUARDANDO PAGAMENTO')
+
+													),
 													
 													'tipouser' => array(
 																
@@ -167,6 +227,16 @@ class VendaStatus extends VentoAdmin{
 									
 									'PRE-ANALISE' => array (
 													
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),
+
 													'tipouser' => array(
 																
 																'==' => array (
@@ -179,7 +249,17 @@ class VendaStatus extends VentoAdmin{
 									),
 									
 									'APROVADO' => array (
-													
+
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),													
+
 													'tipouser' => array(
 																
 																'==' => array (
@@ -193,6 +273,16 @@ class VendaStatus extends VentoAdmin{
 									
 									'AGUARDAR DOCUMENTOS' => array (
 													
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),
+													
 													'tipouser' => array(
 																
 																'==' => array (
@@ -205,7 +295,17 @@ class VendaStatus extends VentoAdmin{
 									),
 
 									'ANEXAR DOCUMENTOS' => array (
-													
+
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),
+																										
 													'tipouser' => array(
 																
 																'==' => array (
@@ -219,6 +319,16 @@ class VendaStatus extends VentoAdmin{
 
 									'DOCUMENTOS ANEXADOS' => array (
 													
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),
+													
 													'tipouser' => array(
 																
 																'==' => array (
@@ -231,7 +341,17 @@ class VendaStatus extends VentoAdmin{
 									),
 
 									'ENVIAR DOCUMENTOS' => array (
-													
+
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),													
+
 													'tipouser' => array(
 																
 																'==' => array (
@@ -244,7 +364,17 @@ class VendaStatus extends VentoAdmin{
 									),
 
 									'DOCUMENTOS ANEXADOS' => array (
-													
+
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),													
+
 													'tipouser' => array(
 																
 																'==' => array (
@@ -257,7 +387,17 @@ class VendaStatus extends VentoAdmin{
 									),
 
 									'DOCUMENTOS ENVIADOS' => array (
-													
+
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),													
+
 													'tipouser' => array(
 																
 																'==' => array (
@@ -271,6 +411,16 @@ class VendaStatus extends VentoAdmin{
 
 									'DOCUMENTOS RECUSADOS' => array (
 													
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),
+
 													'tipouser' => array(
 																
 																'==' => array (
@@ -283,7 +433,17 @@ class VendaStatus extends VentoAdmin{
 									),
 									
 									'FINALIZADA' => array (
-													
+
+													'tipouserAdministrador' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('AUDITOR')
+																		),
+																'flux' => array('PRE-ANALISE','APROVADO','SEM COBERTURA','RESTRIÇÃO','REDIRECIONADO','DEVOLVIDO','AGUARDAR DOCUMENTOS','ANEXAR DOCUMENTOS','DOCUMENTOS ANEXADOS','ENVIAR DOCUMENTOS','DOCUMENTOS ENVIADOS','DOCUMENTOS RECUSADOS','CANCELADO','FINALIZADA','ESTORNADA')
+
+													),													
+
 													'tipouser' => array(
 																
 																'==' => array (

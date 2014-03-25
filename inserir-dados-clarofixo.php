@@ -526,7 +526,7 @@ if(v == 'Pessoa Jurí­dica') {
 
 function verificaassinatura(v){
 
-if(v == "Nova Linha"){ $('#tipoplano').html('<option value=""></option><!-- <option value="Pré Pago">Pré Pago</option> --><option value="Pós Pago">Pós Pago</option>'); }
+if(v == "Nova Linha" || v == "Reposição"){ $('#tipoplano').html('<option value=""></option><option value="Pré Pago">Pré Pago</option><option value="Pós Pago">Pós Pago</option>'); }
 
 else if(v == "Portabilidade"){ $('#tipoplano').html('<option value=""></option><option value="Pós Pago">Pós Pago</option>'); }
 
@@ -548,7 +548,7 @@ function verificatipoplano(v){
 
 
 
-if(v == "Pré Pago"){ $('#plano').html('<option value=""></option><option value="Pré 15">Pré 15</option><option value="Pré Fixo Ilimitado Local">Pré Fixo Ilimitado Local</option>'); }
+if(v == "Pré Pago"){ $('#plano').html('<option value=""></option><option value="CONTROLE FIXO">Controle Fixo</option><option value="PRÉ FIXO 15">Pré Fixo 15</option>'); }
 
 
 
@@ -581,9 +581,9 @@ function verificaplano(v){
 
 
 
-if(v == "Pré 15"){ document.getElementById('valorplano').value = '15,00'; }
+if(v == "CONTROLE FIXO"){ document.getElementById('valorplano').value = '0'; }
 
-else if(v == "Pré Fixo Ilimitado Local"){ document.getElementById('valorplano').value = '19,90';}
+else if(v == "PRÉ FIXO 15"){ document.getElementById('valorplano').value = '0';}
 
 else if(v == "FAV Local"){ document.getElementById('valorplano').value = '19,90'; }
 
@@ -602,6 +602,7 @@ else if(v == "FAV Local e DDD + TV"){ document.getElementById('valorplano').valu
 else if(v == "FAV Local e DDD com Móvel + TV"){ document.getElementById('valorplano').value = '39,90'; }
 
 else { document.getElementById('valorplano').value = '';}
+
 
 <?php
 
@@ -693,10 +694,44 @@ else{ document.getElementById('valoraparelho').value = ''; $("#fotoaparelho").fa
 	
 
 	}
+	
+	
+	
+else if(tipoassinatura == 'Reposição'){
+
+	
+<?php
+
+foreach($aparelhos as $key=>$value)
+{
+	if($key==0)
+	{
+
+?>
+if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_reposicao"]; ?>'; }
+
+<?php
+
+	}else{
+
+?>
+
+else if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_reposicao"]; ?>'; }
+
+<?php
+	}
+}
+?>
 
 
 
+else{ document.getElementById('valoraparelho').value = ''; }	
 
+	
+
+	
+
+	}
 
 
 
@@ -721,7 +756,7 @@ foreach($aparelhos as $key=>$value)
 
 ?>
 
-if(plano == 'Pré 15' || plano == 'Pré Fixo Ilimitado Local'){ 
+if(plano == 'PRÉ FIXO 15' || plano == 'CONTROLE FIXO'){ 
 
 
 
@@ -778,7 +813,7 @@ foreach($aparelhos as $key=>$value)
 
 ?>
 
-if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_controle"]; ?>'; 
+if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_pos"]; ?>'; 
 
 $("#fotoaparelho").fadeOut(600, function(){
 
@@ -792,7 +827,7 @@ $("#fotoaparelho").fadeIn(600); });}
 ?>
 
 
-else if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_controle"]; ?>'; 
+else if(v == '<?php echo $value["id_aparelho"]; ?>'){document.getElementById('valoraparelho').value = '<?php echo $value["preco_novalinha_pos"]; ?>'; 
 
 $("#fotoaparelho").fadeOut(600, function(){
 
@@ -1926,6 +1961,8 @@ $(document).ready( function() {
 <option value="Nova Linha">Nova Linha</option>
 
 <option value="Portabilidade">Portabilidade</option>
+
+<option value="Reposição">Reposição</option>
 
 </select>
 
