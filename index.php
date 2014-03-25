@@ -11,87 +11,68 @@ $passaporte->validarMaquina();
 */
 
 
-
-
 if(!isset($_SESSION['nomobile'])){
 
 include_once "includes/ifmobile.php";
 
 }
 
-
-
 include_once "conexao.php";
-
-
-
-
-
-
-
 
 // Verificar se está logado
 
 if(isset($_SESSION['usuario'])){ ?>
 
-	
 
 <script type="text/javascript">
 
 window.location = 'adm'
 
-</script>	
-
-	
-
-	
+</script>
 
 <? } 
 
 
-
 if(isset($_POST['login'])){
 
-if(!$_POST['resetarsenha']){
+	if($_POST['resetarsenha'] == 'false'){
 
-$login = $_POST['login'];
+		$login = $_POST['login'];
 
-$senha =  md5($_POST['senha']);
-
-
-
-$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
-
-$linha = mysql_fetch_array($consulta);
+		$senha =  md5($_POST['senha']);
 
 
 
-if($linha == 0){ $erro = "1";} else{
+		$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
 
-
-$_SESSION['usuario'] = $linha['id'];
-
-// Cria logon aqui
-
-
-$genLogon = new Logon($conexao);
-$genLogon->maxLogons = 8; // Numero maximo de logins simultaneos
-$genLogon->efetuarLogon($linha['login'], $linha['nome'] );
-
-
-$data = date("Y-m-d H:i:s");
+		$linha = mysql_fetch_array($consulta);
 
 
 
-//LOG ENTRADA
+		if($linha == 0){ $erro = "1";} else{
 
 
-$insert_entrada = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$data."','".$linha['id']."','Entrou no sistema.')");
+			$_SESSION['usuario'] = $linha['id'];
+
+			// Cria logon aqui
+
+
+			$genLogon = new Logon($conexao);
+			$genLogon->maxLogons = 8; // Numero maximo de logins simultaneos
+			$genLogon->efetuarLogon($linha['login'], $linha['nome'] );
+
+
+			$data = date("Y-m-d H:i:s");
+
+
+
+			//LOG ENTRADA
+
+
+			$insert_entrada = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$data."','".$linha['id']."','Entrou no sistema.')");
 
 
 ?>
-
-
 
 <script type="text/javascript">
 
@@ -99,15 +80,13 @@ window.location = 'adm?a=1';
 
 </script>
 
-
-
 <?
 
-}
+			}
 
 }
 
-else{
+else if ($_POST['resetarsenha'] == 'true'){
 	
 	$email = $_POST['email'];
 	
@@ -126,7 +105,8 @@ else{
 	//Se não estiver cadastrado, informar na tela e recarregar página.
 	
 	if($linha == 0){
-		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='2'> ERRO: e-mail não cadastrado no sistema.");}
+		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='0'> <script> alert('ERRO: e-mail não cadastrado no sistema.'); </script>");
+		}
 	else{
 		require_once("lib/PHPMailer-master/class.phpmailer.php"); // requere a PHPMailer
 		$mail = new PHPMailer(); // instancia a classe PHPMailer
@@ -159,14 +139,14 @@ else{
 		$mail->Body     = "Olá ".$linha['nome']."! \n\nAcesse o link a seguir para completar o processo de redefinição de sua senha no Vento Admin. \n\n".$link." \n\nSe você não solicitou redefinição de senha no Vento Admin, por favor desconsidere este e-mail."; //Mensagem
 
 		if($mail->Send()){ //envio da mensagem
-			echo "<script type='text/javascript'> alert('E-mail enviado com sucesso! Verifique sua caixa de entrada.');</script>";
+			echo "<script> alert('E-mail enviado com sucesso! Verifique sua caixa de entrada.');</script>";
+			setcookie('redefinir',$email, time()+300);
 		}
 		else
-			echo "<script type='text/javascript'> alert('Ocorreu um erro ao enviar e-mail. Tente novamente.');</script>";
+			echo "<script> alert('Ocorreu um erro ao enviar e-mail. Tente novamente.');</script>";
 		
 		$mail->SmtpClose(); //encerra a sessão SMTP
 		
-		setcookie('redefinir',$email, time()+300);
 		}
 	}
 }
@@ -208,23 +188,23 @@ $(document).ready(function(e) {
 });
 
 function esquecisenha(str){
-	
+
 	if(str=='esqueci'){
-		$(".camposlogin").css('display','none');
+		$(".camposlogin").hide();
 		$("#login").val('');
 		$("#senha").val('');
-		$(".campossenha").css('display','');
-		$("#resetarsenha").val(true);
+		$(".campossenha").show();
+		$("#resetarsenha").val('true');
 	}
 	else if(str=='voltar'){
-		$(".campossenha").css('display','none');
+		$(".campossenha").hide();
 		$("#email").val('');
-		$(".camposlogin").css('display','');
-		$("#resetarsenha").val(false);
+		$(".camposlogin").show();
+		$("#resetarsenha").val('false');
 		}
 	
 	}
-	
+
 function validaEmail(email) { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -297,7 +277,7 @@ left:0%; top:50%; opacity:0;
 
 <form name="logar" action="" method="post">
 
-<input type="hidden" name="resetarsenha" id="resetarsenha">
+<input type="hidden" name="resetarsenha" id="resetarsenha" value="false">
 
 <tr class="camposlogin">
 

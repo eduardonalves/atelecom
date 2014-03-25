@@ -22,7 +22,7 @@ if(isset($_GET['token'])){
 	
 	//Se passaram 5 minutos desde a geração do hash o link expira
 	if((time() - $time > 300) || ($time > time()))
-		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='3; URL=http://atelecom.vento-consulting.com/' /> Este link expirou. Solicite um novo link para redefinição de sua senha.");
+		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='3; URL=http://atelecom.vento-consulting.com/' /> <script> alert('Este link expirou. Solicite um novo link para redefinição de sua senha.'); </script>");
 	
 	//Se as senhas foram devidamente recebidas...
 	if(isset($_POST['novasenha']) && isset($_POST['confirmarsenha'])){
@@ -32,10 +32,10 @@ if(isset($_GET['token'])){
 		$redefine_senha = $conexao->query("UPDATE usuarios SET senha = '".$senha."' WHERE hash = '".$hash."'"); //atualiza a senha no registro que corresponde ao hash recebido
 		
 		if($redefine_senha){
-			echo("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='0; URL=http://atelecom.vento-consulting.com/' /> <script type='text/javascript'> alert('Senha alterada com sucesso!');</script>");
+			echo("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='0; URL=http://atelecom.vento-consulting.com/' /> <script> alert('Senha alterada com sucesso!'); </script>");
 		}
 		else
-			die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='0; URL=http://atelecom.vento-consulting.com/' /> Ocorreu um erro ao processar pedido de redefinição de senha.");
+			die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='0; URL=http://atelecom.vento-consulting.com/' /> <script> alert('Ocorreu um erro ao processar pedido de redefinição de senha.'); </script>");
 		}
 		
 	}
