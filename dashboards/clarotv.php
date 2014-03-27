@@ -1,6 +1,6 @@
 <?
 
-// Verificar se está logado
+// Verificar se estÃ¡ logado
 if(!isset($_SESSION['usuario'])){ ?>
 	
 <script type="text/javascript">
@@ -70,7 +70,7 @@ window.location = '?p=<?= $_GET['p'];?>'
 <? }?>
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
@@ -111,8 +111,8 @@ window.location = '?p=<?= $_GET['p'];?>'
 
 <script type="text/javascript">
 
- /*Cria uma função de nome mascara, onde o primeiro argumento passado é um dos
-     objetos input O segundo é especificando o tipo de método no qual será tratado*/
+ /*Cria uma funÃ§Ã£o de nome mascara, onde o primeiro argumento passado Ã© um dos
+     objetos input O segundo Ã© especificando o tipo de mÃ©todo no qual serÃ¡ tratado*/
     function mascara(o,f){
         v_obj=o;
         v_fun=f;
@@ -120,21 +120,21 @@ window.location = '?p=<?= $_GET['p'];?>'
     }
     
     function execmascara(){
-        /*Pegue o valor do objeto e atribua o resultado da função v_fun; cujo o conteúdo
-        da mesma é a função que foi referida e que será utilizada para tratar dos dados*/
+        /*Pegue o valor do objeto e atribua o resultado da funÃ§Ã£o v_fun; cujo o conteÃºdo
+        da mesma Ã© a funÃ§Ã£o que foi referida e que serÃ¡ utilizada para tratar dos dados*/
         v_obj.value=v_fun(v_obj.value);
     }
     
     function soNumeros(v){
-        return v.replace(/\D/g,"");//Exclua tudo que não for numeral e retorne o valor
+        return v.replace(/\D/g,"");//Exclua tudo que nÃ£o for numeral e retorne o valor
     }
 	
     function data(v){
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
         v=v.replace(/\D/g,"");
-        //Coloca parênteses em volta dos dois primeiros dígitos
+        //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
         v=v.replace(/^(\d{2})(\d)/g,"$1/$2");
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
         v=v.replace(/(\d{2})(\d)/,"$1/$2");
         return v;
     }	
@@ -217,7 +217,7 @@ box-shadow:  0px 0px 10px 2px #999;
 <table border="0" width="100%">
 
 <tr align="center" height="40px" style="color:#999; font-weight:bold; font-size:14px;">
-<td>COLUNAS VISÍVEIS</td>
+<td>COLUNAS VISÃVEIS</td>
 </tr>
 </table>
 
@@ -276,10 +276,10 @@ box-shadow:  0px 0px 10px 2px #999;
 </tr>
 <tr align="left">
 <td><input type="checkbox" name="chk25" <? if(strstr($USUARIO['colunas_clarotv'],'(tipo_venda)')){?>checked="checked"<? } ?> value="tipo_venda" /> Tipo Venda</td>
-<td width="50%"><input type="checkbox" name="chk26" <? if(strstr($USUARIO['colunas_clarotv'],'(motivo_analise)')){?>checked="checked"<? } ?> value="motivo_analise" /> Motivo Análise</td>
+<td width="50%"><input type="checkbox" name="chk26" <? if(strstr($USUARIO['colunas_clarotv'],'(motivo_analise)')){?>checked="checked"<? } ?> value="motivo_analise" /> Motivo AnÃ¡lise</td>
 </tr>
 <tr align="left">
-<td width="50%"><input type="checkbox" name="chk27" <? if(strstr($USUARIO['colunas_clarotv'],'(agendamento_gravacao)')){?>checked="checked"<? } ?> value="agendamento_gravacao" /> Agend. Gravação</td>
+<td width="50%"><input type="checkbox" name="chk27" <? if(strstr($USUARIO['colunas_clarotv'],'(agendamento_gravacao)')){?>checked="checked"<? } ?> value="agendamento_gravacao" /> Agend. GravaÃ§Ã£o</td>
 <td></td>
 </tr>
 
@@ -314,15 +314,15 @@ box-shadow:  0px 0px 10px 2px #999;
 <td bgcolor="#565656" width="380px" align="center">
 <select name="ve" onchange="javascript:document.forms.filtro.submit();">
 <option value="1" <? if($_GET['ve'] == '1'){ ?> selected="selected" <? } ?>>Vendas</option>
-<option value="2" <? if($_GET['ve'] == '2'){ ?> selected="selected" <? } ?>>Instalações</option>
+<option value="2" <? if($_GET['ve'] == '2'){ ?> selected="selected" <? } ?>>InstalaÃ§Ãµes</option>
 </select>
 &nbsp; &nbsp;
-Mês: 
+MÃªs: 
 <select name="me" onchange="javascript:document.forms.filtro.submit();">
 <option value="todos">Todos</option>
 <option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
 <option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
-<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
+<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÃ‡O</option>
 <option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
 <option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
 <option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
@@ -356,7 +356,7 @@ Ano:
 
 <tr style="font-size:13px">
 <td>Mostrar: <span style=" cursor:pointer; <? if(!$_GET['t'] && !$_GET['f'] && !$_GET['s'] && !$_GET['v'] && !$_GET['i'] && !$_GET['b'] && !$_GET['di'] ){?> font-weight:bold;<? } ?>" onclick="window.location = '?p=<?= $_GET['p'];?>'">Todos</span></td>
-<td> | Tipo de Instalação: 
+<td> | Tipo de InstalaÃ§Ã£o: 
 <select name="t" onchange="javascript:document.forms.filtro.submit();">
 <option value=""></option>
 <option value="Interna" <? if($_GET['t'] == 'Interna'){?>selected="selected"<? }?>>Interna</option>
@@ -369,8 +369,8 @@ Ano:
 <select name="f" onchange="javascript:document.forms.filtro.submit();">
 <option value=""></option>
 <option value="BOLETO" <? if($_GET['f'] == 'BOLETO'){?>selected="selected"<? }?>>Boleto</option>
-<option value="DÉBITO" <? if($_GET['f'] == 'DÉBITO'){?>selected="selected"<? }?>>Débito</option>
-<option value="CARTÃO DE CRÉDITO" <? if($_GET['f'] == 'CARTÃO DE CRÉDITO'){?>selected="selected"<? }?>>Cartão</option>
+<option value="DÃ‰BITO" <? if($_GET['f'] == 'DÃ‰BITO'){?>selected="selected"<? }?>>DÃ©bito</option>
+<option value="CARTÃƒO DE CRÃ‰DITO" <? if($_GET['f'] == 'CARTÃƒO DE CRÃ‰DITO'){?>selected="selected"<? }?>>CartÃ£o</option>
 
 </select>
 </td>
@@ -379,9 +379,9 @@ Ano:
  | Status:
 <select name="s" onchange="javascript:document.forms.filtro.submit();">
 <option value=""></option>
-<option value="PRE-ANALISE" <? if($_GET['s'] == 'PRE-ANALISE'){?>selected="selected"<? }?>>Pré-Análise</option>
-<option value="ANÁLISE" <? if($_GET['s'] == 'ANÁLISE'){?>selected="selected"<? }?>>Análise</option>
-<option value="RESTRIÇÃO" <? if($_GET['s'] == 'RESTRIÇÃO'){?>selected="selected"<? }?>>Restrição</option>
+<option value="PRE-ANALISE" <? if($_GET['s'] == 'PRE-ANALISE'){?>selected="selected"<? }?>>PrÃ©-AnÃ¡lise</option>
+<option value="ANÃLISE" <? if($_GET['s'] == 'ANÃLISE'){?>selected="selected"<? }?>>AnÃ¡lise</option>
+<option value="RESTRIÃ‡ÃƒO" <? if($_GET['s'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? }?>>RestriÃ§Ã£o</option>
 
 <option value="GRAVAR" <? if($_GET['s'] == 'GRAVAR'){?>selected="selected"<? }?>>Gravar</option>
 <option value="SEM CONTATO" <? if($_GET['s'] == 'SEM CONTATO'){?>selected="selected"<? }?>>Sem Contato</option>
@@ -402,7 +402,7 @@ Ano:
 
 <td> | Venda de: <input type="text" name="v" id="calendario" onKeyPress="mascara(this,data)" value="<?= $_GET['v'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
 
-<td>Até: <input type="text" name="ate" id="calendario2" onKeyPress="mascara(this,data)" value="<?= $_GET['ate'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
+<td>AtÃ©: <input type="text" name="ate" id="calendario2" onKeyPress="mascara(this,data)" value="<?= $_GET['ate'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
 
 </tr>
 
@@ -414,7 +414,7 @@ Ano:
 
 <td width="190px"> | Data Instalada: <input type="text" name="di" id="calendario4" class="datepicker" onKeyPress="mascara(this,data)" value="<?= $_GET['di'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
 
-<td width="210px" align="center"> | Com Gravação: <input type="radio" name="g" value="1" <? if($_GET['g'] == '1'){?> checked="checked" <? }?> onchange="javascript:document.forms.filtro.submit();" /> Sim <input type="radio" name="g" value="0" <? if($_GET['g'] == '0'){?> checked="checked" <? }?> onchange="javascript:document.forms.filtro.submit();" /> Não</td>
+<td width="210px" align="center"> | Com GravaÃ§Ã£o: <input type="radio" name="g" value="1" <? if($_GET['g'] == '1'){?> checked="checked" <? }?> onchange="javascript:document.forms.filtro.submit();" /> Sim <input type="radio" name="g" value="0" <? if($_GET['g'] == '0'){?> checked="checked" <? }?> onchange="javascript:document.forms.filtro.submit();" /> NÃ£o</td>
 
 <td> | Tipo Venda: <select name="tpv" onchange="javascript:document.forms.filtro.submit();">
 				   	<option></option>
@@ -462,7 +462,7 @@ include "includes/filtro-clarotv.php";
 
 <td width="30" align="center">
 
-<img src="img/gear.png" width="20" style="cursor:pointer" onclick="mostrarcolunas();" title="Selecionar Colunas Visíveis"  />
+<img src="img/gear.png" width="20" style="cursor:pointer" onclick="mostrarcolunas();" title="Selecionar Colunas VisÃ­veis"  />
 </td>
 <td width="100px" align="right">
 <form name="mostrar" method="get" action="">
@@ -545,7 +545,7 @@ include "includes/filtro-clarotv.php";
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(endereco)')){?>
-<td title="Endereço do Cliente" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.endereco DESC'){ echo 'vendas_clarotv.endereco DESC'; } else { echo 'vendas_clarotv.endereco ASC'; }?>'">Endereço <? if($_GET['o'] == 'vendas_clarotv.endereco DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.endereco ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="EndereÃ§o do Cliente" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.endereco DESC'){ echo 'vendas_clarotv.endereco DESC'; } else { echo 'vendas_clarotv.endereco ASC'; }?>'">EndereÃ§o <? if($_GET['o'] == 'vendas_clarotv.endereco DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.endereco ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(cidade)')){?>
@@ -565,7 +565,7 @@ include "includes/filtro-clarotv.php";
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(valor)')){?>
-<td title="Valor da Instalação" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'ABS(vendas_clarotv.valor) DESC'){ echo 'ABS(vendas_clarotv.valor) DESC'; } else { echo 'ABS(vendas_clarotv.valor) ASC'; }?>'">Valor <? if($_GET['o'] == 'ABS(vendas_clarotv.valor) DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'ABS(vendas_clarotv.valor) ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Valor da InstalaÃ§Ã£o" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'ABS(vendas_clarotv.valor) DESC'){ echo 'ABS(vendas_clarotv.valor) DESC'; } else { echo 'ABS(vendas_clarotv.valor) ASC'; }?>'">Valor <? if($_GET['o'] == 'ABS(vendas_clarotv.valor) DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'ABS(vendas_clarotv.valor) ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(data)')){?>
@@ -589,11 +589,11 @@ include "includes/filtro-clarotv.php";
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(tecnico)')){?>
-<td title="Forma de Pagamento" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.tecnico_id DESC'){ echo 'vendas_clarotv.tecnico_id DESC'; } else { echo 'vendas_clarotv.tecnico_id ASC'; }?>'">Técnico <? if($_GET['o'] == 'vendas_clarotv.tecnico_id DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.tecnico_id ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Forma de Pagamento" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.tecnico_id DESC'){ echo 'vendas_clarotv.tecnico_id DESC'; } else { echo 'vendas_clarotv.tecnico_id ASC'; }?>'">TÃ©cnico <? if($_GET['o'] == 'vendas_clarotv.tecnico_id DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.tecnico_id ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(pontos)')){?>
-<td title="Número de Pontos Adicionais" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.pontos DESC'){ echo 'vendas_clarotv.pontos DESC'; } else { echo 'vendas_clarotv.pontos ASC'; }?>'">Pontos Adi. <? if($_GET['o'] == 'vendas_clarotv.pontos DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.pontos ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="NÃºmero de Pontos Adicionais" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.pontos DESC'){ echo 'vendas_clarotv.pontos DESC'; } else { echo 'vendas_clarotv.pontos ASC'; }?>'">Pontos Adi. <? if($_GET['o'] == 'vendas_clarotv.pontos DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.pontos ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(motivo_cancelamento)')){?>
@@ -601,7 +601,7 @@ include "includes/filtro-clarotv.php";
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(motivo_analise)')){?>
-<td title="Motivo Análise" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.motivo_analise DESC'){ echo 'vendas_clarotv.motivo_analise DESC'; } else { echo 'vendas_clarotv.motivo_analise ASC'; }?>'">Motivo Análise <? if($_GET['o'] == 'vendas_clarotv.motivo_analise DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.motivo_analise ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Motivo AnÃ¡lise" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.motivo_analise DESC'){ echo 'vendas_clarotv.motivo_analise DESC'; } else { echo 'vendas_clarotv.motivo_analise ASC'; }?>'">Motivo AnÃ¡lise <? if($_GET['o'] == 'vendas_clarotv.motivo_analise DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.motivo_analise ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 <? } ?>
 
 
@@ -610,7 +610,7 @@ include "includes/filtro-clarotv.php";
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(agendamento_gravacao)')){?>
-<td title="Agendamento Gravação" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.agendGravacao DESC'){ echo 'vendas_clarotv.agendGravacao DESC'; } else { echo 'vendas_clarotv.agendGravacao ASC'; }?>'">Agend. Gravação <? if($_GET['o'] == 'vendas_clarotv.agendGravacao DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.agendGravacao ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Agendamento GravaÃ§Ã£o" onclick="window.location = '?p=clarotv&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'vendas_clarotv.agendGravacao DESC'){ echo 'vendas_clarotv.agendGravacao DESC'; } else { echo 'vendas_clarotv.agendGravacao ASC'; }?>'">Agend. GravaÃ§Ã£o <? if($_GET['o'] == 'vendas_clarotv.agendGravacao DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'vendas_clarotv.agendGravacao ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 <? } ?>
 
 
@@ -694,7 +694,7 @@ if ($class=="tr2"){ //alterna a cor
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(endereco)')){?>
-<td title="Endereço do Cliente" <? if(strstr($_GET['o'],'endereco')){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['endereco']));?></td>
+<td title="EndereÃ§o do Cliente" <? if(strstr($_GET['o'],'endereco')){ ?>class="tdselected" <? } ?>><?= ucwords(strtolower($VENDA['endereco']));?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(cidade)')){?>
@@ -742,7 +742,7 @@ $titleAgendamento .= " :: ".$DatasReagendamentos['agendamento']; }
 	 }
 
 ?>
-<td title="<?= $titleAgendamento; ?>" <? if($VENDA['status'] != 'CONECTADO' && $VENDA['status'] != 'RESTRIÇÃO' && $VENDA['status'] != 'CANCELADO' && $VENDA['data_marcada'] < date("Ymd")){ ?> style="color:#E00; font-weight:bold" <? } ?> <? if(strstr($_GET['o'],'data_marcada')){ ?>class="tdselected"<? } ?>>
+<td title="<?= $titleAgendamento; ?>" <? if($VENDA['status'] != 'CONECTADO' && $VENDA['status'] != 'RESTRIÃ‡ÃƒO' && $VENDA['status'] != 'CANCELADO' && $VENDA['data_marcada'] < date("Ymd")){ ?> style="color:#E00; font-weight:bold" <? } ?> <? if(strstr($_GET['o'],'data_marcada')){ ?>class="tdselected"<? } ?>>
 
 <? if($VENDA['data_marcada']){ echo substr($VENDA['data_marcada'],6,2)."/".substr($VENDA['data_marcada'],4,2)."/".substr($VENDA['data_marcada'],0,4);}?>
 
@@ -767,11 +767,11 @@ $titleAgendamento .= " :: ".$DatasReagendamentos['agendamento']; }
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(tecnico)')){?>
-<td title="Nome do Técnico" <? if(strstr($_GET['o'],'tecnico')){ ?>class="tdselected" <? } ?>><? $conTEC = $conexao->query("SELECT * FROM tecnicos WHERE tecnico_id = '".$VENDA['tecnico_id']."'"); $TEC = mysql_fetch_array($conTEC); echo $TEC['nome'];?></td>
+<td title="Nome do TÃ©cnico" <? if(strstr($_GET['o'],'tecnico')){ ?>class="tdselected" <? } ?>><? $conTEC = $conexao->query("SELECT * FROM tecnicos WHERE tecnico_id = '".$VENDA['tecnico_id']."'"); $TEC = mysql_fetch_array($conTEC); echo $TEC['nome'];?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(pontos)')){?>
-<td title="Número de Pontos Adicionais" <? if(strstr($_GET['o'],'pontos')){ ?>class="tdselected" <? } ?>><?= $VENDA['pontos'];?></td>
+<td title="NÃºmero de Pontos Adicionais" <? if(strstr($_GET['o'],'pontos')){ ?>class="tdselected" <? } ?>><?= $VENDA['pontos'];?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(motivo_cancelamento)')){?>
@@ -779,7 +779,7 @@ $titleAgendamento .= " :: ".$DatasReagendamentos['agendamento']; }
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(motivo_analise)')){?>
-<td title="Motivo Análise" <? if(strstr($_GET['o'],'motivo_analise')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_analise']);?></td>
+<td title="Motivo AnÃ¡lise" <? if(strstr($_GET['o'],'motivo_analise')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_analise']);?></td>
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(tipo_venda)')){?>
@@ -788,7 +788,7 @@ $titleAgendamento .= " :: ".$DatasReagendamentos['agendamento']; }
 
 <? if(strstr($USUARIO['colunas_clarotv'],'(agendamento_gravacao)')){?>
 
-<td title="Agendamento Gravação" <? if(strstr($_GET['o'],'agendGravacao')){ ?>class="tdselected" <? } ?>>
+<td title="Agendamento GravaÃ§Ã£o" <? if(strstr($_GET['o'],'agendGravacao')){ ?>class="tdselected" <? } ?>>
 
 <? if($VENDA['agendGravacao'] != '0000-00-00 00:00:00'){ echo strtoupper($VENDA['agendGravacao']); }?></td>
 
@@ -809,12 +809,12 @@ $titleAgendamento .= " :: ".$DatasReagendamentos['agendamento']; }
 
 <td width="26px" style="cursor:pointer">
 <? if($USUARIO['inserir_gravacao'] == 1 && $VENDA['gravacao'] == '' && $VENDA['status'] == 'GRAVAR'){?>
-<img src="img/icone-gravar.png" title="Inserir Gravação" width="13" height="13" onclick="Popup=window.open('http://172.16.0.30/vento-adm/upload-gravacao.php?p=<?= $VENDA['proposta']; ?>','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=470,height=350,left=430,top=100');" />
+<img src="img/icone-gravar.png" title="Inserir GravaÃ§Ã£o" width="13" height="13" onclick="Popup=window.open('http://172.16.0.30/vento-adm/upload-gravacao.php?p=<?= $VENDA['proposta']; ?>','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=470,height=350,left=430,top=100');" />
 <? } ?>
 
 <? if($VENDA['gravacao'] != ''){?>
 
-<img src="img/icone-ouvir.png" title="Ouvir Gravação" width="13" height="13" onclick="javascript:window.open('http://172.16.0.30/audio/clarotv/orig/<?= $VENDA['gravacao'];?>','_blank')" />
+<img src="img/icone-ouvir.png" title="Ouvir GravaÃ§Ã£o" width="13" height="13" onclick="javascript:window.open('http://172.16.0.30/audio/clarotv/orig/<?= $VENDA['gravacao'];?>','_blank')" />
 
 <? } ?>
 </td>
@@ -871,9 +871,9 @@ if($numpag == $pg){ ?>
 
 <?php if(($inicial + $numreg) < $quantreg ){ ?>
 <td width="70px" align="center" bgcolor="#ededed" onMouseOver="this.style.background = '#f6f6f6'" onMouseOut="this.style.background = '#ededed'" style="cursor:pointer; font-size:13px" onClick="window.location = ('?p=<?= $_GET['p']; ?>&m=<?= $_GET['m'];?>&o=<?= $_GET['o']; ?>&t=<?= $_GET['t']; ?>&f=<?= $_GET['f']; ?>&s=<?= $_GET['s']; ?>&v=<?= $_GET['v']; ?>&i=<?= $_GET['i']; ?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg + 1); ?>&di=<?= $_GET['di']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&ate=<?= $_GET['ate']; ?>&g=<?= $_GET['g']; ?>')">
-Próximo &raquo;</td><? } else {?>
+PrÃ³ximo &raquo;</td><? } else {?>
 
-<td width="70px" align="center" bgcolor="#fbfbfb" style="cursor:default; font-size:13px; color:#cdcdcd">Próximo &raquo;</td> 
+<td width="70px" align="center" bgcolor="#fbfbfb" style="cursor:default; font-size:13px; color:#cdcdcd">PrÃ³ximo &raquo;</td> 
 
 <? } ?>
 <td width="10px"></td>
